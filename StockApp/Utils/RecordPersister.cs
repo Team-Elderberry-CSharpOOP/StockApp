@@ -4,14 +4,14 @@ using System.Windows.Forms;
 
 namespace StockApp.Utils
 {
-    class StockPersister : IPersister
+    class RecordPersister : IRecordPersister
     {
         public const string DataDir = @"Data";
         public const string RecordsFilename = @"records.txt";
 
-        private static StockPersister instance;
+        private static IRecordPersister instance;
 
-        private StockPersister()
+        private RecordPersister()
         {
             if (!Directory.Exists(DataDir))
             {
@@ -19,13 +19,13 @@ namespace StockApp.Utils
             }
         }
 
-        public static StockPersister Instance
+        public static IRecordPersister Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new StockPersister();
+                    instance = new RecordPersister();
                 }
                 return instance;
             }

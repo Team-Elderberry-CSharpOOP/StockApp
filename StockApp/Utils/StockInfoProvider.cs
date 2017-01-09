@@ -31,7 +31,7 @@ namespace StockApp.Utils
         private static void StartTimer()
         {
             // Request data on interval
-            RequestTimer mt = new RequestTimer();
+            IRequestTimer mt = new RequestTimer();
             mt.StartWithCallback(1000 * 60 * 3, OnTimerElapsed);
         }
 
@@ -104,8 +104,8 @@ namespace StockApp.Utils
 
         private static void SaveRecord(string record)
         {
-            StockPersister stockPersister = StockPersister.Instance;
-            stockPersister.AddRecord(record);
+            IRecordPersister stockRecordPersister = RecordPersister.Instance;
+            stockRecordPersister.AddRecord(record);
         }
     }
 }
