@@ -26,17 +26,18 @@ namespace StockApp.Utils
         public static void Start()
         {
             // Request data on first usage
-            ExecuteJSONRequest();
-
-            StockPersister stockPersister = StockPersister.Instance;
-            stockPersister.AddRecord(currentRecord);
-
-            // Request data on interval
-            RequestTimer mt = new RequestTimer();
-            mt.StartWithCallback(2000, OnTimerElapsed);
+            ProcessJSONRequest();
+            StartTimer();
         }
 
-        private static void ExecuteJSONRequest()
+        private static void StartTimer()
+        {
+            // Request data on interval
+            RequestTimer mt = new RequestTimer();
+            mt.StartWithCallback(1000 * 60 * 3, OnTimerElapsed);
+        }
+
+        private static void ProcessJSONRequest()
         {
             string jsonYahoo = string.Empty;
             string jsonTsla = string.Empty;
@@ -50,7 +51,7 @@ namespace StockApp.Utils
                 bool hasFailed = false;
                 string msg = string.Empty;
 
-                // TODO: Implement custom Exceptions?
+                // TODO: Implement custom Exceptions
                 try
                 {
                     // jsonTest = web.DownloadString(TestURL);
@@ -89,19 +90,24 @@ namespace StockApp.Utils
                 }
                 
                 IEnumerable<string> tickers = new List<string>(new [] { jsonYahoo, jsonTsla, jsonAMZN, jsonORCL });
-                BuildRecord(tickers);
+                SaveRecord(BuildRecord(tickers));
             }
         }
 
-        private static void BuildRecord(IEnumerable<string> tickers)
+        private static string BuildRecord(IEnumerable<string> tickers)
         {
-            currentRecord = string.Join(Environment.NewLine, tickers);
+            return string.Join(Environment.NewLine, tickers);
         }
 
         private static void OnTimerElapsed(object sender, EventArgs eventArgs)
         {
+            ProcessJSONRequest();
+        }
+
+        private static void SaveRecord(string record)
+        {
             StockPersister stockPersister = StockPersister.Instance;
-            stockPersister.AddRecord(currentRecord);
+            stockPersister.AddRecord(record);
         }
     }
 }
