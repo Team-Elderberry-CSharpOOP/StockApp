@@ -118,13 +118,15 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Profile\IUser.cs" />
     <Compile Include="Profile\User.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\IPersister.cs" />
+    <Compile Include="Utils\IRecordPersister.cs" />
+    <Compile Include="Utils\IRequestTimer.cs" />
     <Compile Include="Utils\RequestTimer.cs" />
     <Compile Include="Utils\SimpleValidator.cs" />
-    <Compile Include="Utils\StockPersister.cs" />
+    <Compile Include="Utils\RecordPersister.cs" />
     <Compile Include="Utils\StockInfoProvider.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

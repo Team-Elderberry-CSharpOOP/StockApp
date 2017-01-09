@@ -6,11 +6,6 @@ namespace StockApp.Utils
 {
     public delegate void ElapsedEventHadler(object sender, EventArgs e);
 
-    internal interface IRequestTimer
-    {
-        void StartWithCallback(int t, ElapsedEventHadler callback);
-    }
-
     class RequestTimer : IRequestTimer
     {
         private event ElapsedEventHadler OnElapsed;

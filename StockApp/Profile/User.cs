@@ -5,7 +5,7 @@ using StockApp.Utils;
 
 namespace StockApp.Profile
 {
-    class User
+    class User : IUser
     {
         public async void SignUp(string email, string password)
         {

@@ -49,7 +49,7 @@ namespace StockApp.Utils
             {
                 SimpleValidator.CheckNullOrEmpty(record, "Record");
 
-                string appendText = record + Environment.NewLine + new string('-', 23) + Environment.NewLine;
+                string appendText = record + Environment.NewLine + Environment.NewLine;
                 File.AppendAllText(file, appendText);
             }
             catch (ArgumentException e)

@@ -1,6 +1,6 @@
 ﻿namespace StockApp.Utils
 {
-    interface IPersister
+    interface IRecordPersister
     {
         void AddRecord(string record);
         void ClearRecords();
