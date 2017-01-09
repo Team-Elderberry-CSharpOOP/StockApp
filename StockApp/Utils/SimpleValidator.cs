@@ -12,7 +12,6 @@ namespace StockApp.Utils
         const string InvalidDateTimeMsg = "Cannot be a value outside the specified time boundaries";
         const string InvalidPhoneMsg = "Must be a valid phone number";
 
-
         public static void CheckNullOrEmpty(string argValue, string argName)
         {
             if (string.IsNullOrEmpty(argValue))
