@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
-using DefiningClasses;
 
 namespace StockApp.Utils
 {
@@ -12,10 +10,10 @@ namespace StockApp.Utils
     {
         private event ElapsedEventHadler OnElapsed;
 
-        // TODO: Not handled Exceptions
         public void StartWithCallback(int t, ElapsedEventHadler callback)
         {
-            SimpleValidator.CheckNull(callback, "Handler Argument");
+            SimpleValidator.CheckNull(callback, "Timer callback");
+
             OnElapsed = callback;
 
             BackgroundWorker bw = new BackgroundWorker();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace DefiningClasses
+namespace StockApp.Utils
 {
     static class SimpleValidator
     {

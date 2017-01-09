@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using DefiningClasses;
 using Firebase.Auth;
+using StockApp.Utils;
 
 namespace StockApp.Profile
 {
     class User
     {
-        public User()
-        {
-
-        }
-
         public async void SignUp(string email, string password)
         {
             try
@@ -39,6 +34,7 @@ namespace StockApp.Profile
 
             try
             {
+                // TODO: Use auth link to implement storage of some user preferences, like portfolio
                 var authLink = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
             }
             catch (FirebaseAuthException e)
@@ -56,9 +52,7 @@ namespace StockApp.Profile
                 return;
             }
 
-
-            // TODO: Sign up successful, notify and redirect to main Form
-            // TODO: Refactor
+            // Sign up successful, notify and redirect to main Form
             MainForm main = Application.OpenForms["MainForm"] as MainForm;
 
             if (main != null)
@@ -69,10 +63,6 @@ namespace StockApp.Profile
             {
                 new MainForm().ShowDialog();
             }
-
-            // FirebaseAuthLink authLink = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
-
-            Console.WriteLine();
         }
 
         public async void SignIn(string email, string password)
@@ -114,8 +104,7 @@ namespace StockApp.Profile
             }
 
 
-            // TODO: Sign in successful, notify and redirect to main Form
-            // TODO: Refactor
+            // Sign in successful, notify and redirect to main Form
             MainForm main = Application.OpenForms["MainForm"] as MainForm;
 
             if (main != null)
@@ -126,10 +115,6 @@ namespace StockApp.Profile
             {
                 new MainForm().ShowDialog();
             }
-
-            // FirebaseAuthLink authLink = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
-
-            Console.WriteLine();
         }
     }
 }

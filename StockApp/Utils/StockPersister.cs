@@ -1,22 +1,21 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using DefiningClasses;
 
 namespace StockApp.Utils
 {
     class StockPersister : IPersister
     {
-        public const string Dir = @"Data";
-        public const string FileName = @"records.txt";
+        public const string DataDir = @"Data";
+        public const string RecordsFilename = @"records.txt";
 
         private static StockPersister instance;
 
         private StockPersister()
         {
-            if (!Directory.Exists(Dir))
+            if (!Directory.Exists(DataDir))
             {
-                Directory.CreateDirectory(Dir);
+                Directory.CreateDirectory(DataDir);
             }
         }
 
@@ -34,12 +33,12 @@ namespace StockApp.Utils
 
         public void AddRecord(string record)
         {
-            string file = Dir + "\\" + FileName;
+            string file = DataDir + "\\" + RecordsFilename;
 
             if (File.Exists(file) && file.Length > (8 * 1024 * 1024))
             {
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
-                MessageBox.Show("Unable to create new stock record. File too big.", "Warning", buttons);
+                MessageBox.Show("Unable to create new stock record. File too big.", "", buttons);
                 return;
             }
 
@@ -104,7 +103,7 @@ namespace StockApp.Utils
 
             try
             {
-                result = File.ReadAllText(Dir + "\\" + FileName);
+                result = File.ReadAllText(DataDir + "\\" + RecordsFilename);
             }
             catch (ArgumentException e)
             {
