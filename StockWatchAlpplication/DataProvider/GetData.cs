@@ -1,12 +1,12 @@
 ﻿namespace Data
 {
-
     using System;
     using System.Net;
 
     internal static class GetData
     {
         const string fileDirectory = @"../../Resources/Data/{0}.csv";
+        const string urlPrototype = @"http://ichart.yahoo.com/table.csv?s={0}&a={1}&b={2}&c={3}&d={4}&e={5}&f={6}&g={7}&ignore=.csv";
 
         #region DownloadData
         //downloading the data from yahoo finance
@@ -21,6 +21,7 @@
         #endregion
 
         #region Create URL
+
         //creating the url with the provided infroamtion
         private static string BuildUrl(string ticker, DateTime startDate, DateTime endDate, string frequency)
         {
@@ -32,7 +33,6 @@
             int endDay = endDate.Day;
             int endYear = endDate.Year;
 
-            string urlPrototype = @"http://ichart.yahoo.com/table.csv?s={0}&a={1}&b={2}&c={3}&d={4}&e={5}&f={6}&g={7}&ignore=.csv";
             return string.Format(urlPrototype,
                 ticker,
                 startMonth,

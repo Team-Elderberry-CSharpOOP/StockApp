@@ -6,6 +6,7 @@
     using LiveCharts.Wpf;
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Globalization;
     using System.Linq;
     using System.Windows.Forms;
@@ -92,6 +93,8 @@
                                              .ToList().Select(x => x.Key == "").First();
             ChooseStockIndex2.SelectedIndex = ChooseStockIndex2.FindStringExact("");
             #endregion
+
+            AddTilesSecondTab();
         }
 
         private void ChooseStockIndex1_SelectedIndexChanged(object sender, EventArgs e)
@@ -129,8 +132,8 @@
                 Title = GetComboBoxKey(ChooseStockIndex1),
                 Values = ChartValues1,
                 PointGeometry = null,
-                Stroke = new SolidColorBrush(Color.FromRgb(0, 174, 219)),
-                Fill = new SolidColorBrush(Color.FromArgb(35, 0, 174, 219)),
+                Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 174, 219)),
+                Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(35, 0, 174, 219)),
                 StrokeThickness = 2.5
             });
         }
@@ -149,15 +152,15 @@
             "d");
 
             ChartValues2 = new ChartValues<DataPoint>(additionalIndex.Data);
-             
-            if(StockIndexLineChart.Series.Count == 2) StockIndexLineChart.Series.RemoveAt(1);
+
+            if (StockIndexLineChart.Series.Count == 2) StockIndexLineChart.Series.RemoveAt(1);
             StockIndexLineChart.Series.Add(new LineSeries
             {
                 Title = GetComboBoxKey(ChooseStockIndex2),
                 Values = ChartValues2,
                 PointGeometry = null,
-                Stroke = new SolidColorBrush(Color.FromRgb(124, 65, 153)),
-                Fill = new SolidColorBrush(Color.FromArgb(35, 124, 65, 153)),
+                Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(124, 65, 153)),
+                Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(35, 124, 65, 153)),
                 StrokeThickness = 2.5
             });
         }
@@ -198,6 +201,88 @@
         {
             UpdateFirstSeries();
             UpdateSecondSeries();
+        }
+
+        private void AddTilesSecondTab()
+        {
+            const int widthHeight = 180;
+            const int spaceBetween = 25;
+            const int numberOfTilesInRow = 4;
+            const int rows = 2;
+            int startPositionX = 0;
+            int startPositionY = 30;
+            List<MetroFramework.Controls.MetroTile> StockWatchTiles = new List<MetroFramework.Controls.MetroTile>();
+            List<Label> StockWatchLabels = new List<Label>();
+
+            //TO BE DELETED - should download and update data frequently
+            List<string>tickers = new List<string>
+            {
+                "AAPL","IBM","GOOG","TSLA","YHOO","BABA", "GE", "GM"
+            };
+
+            List<double> priceChanges = new List<double>
+            {
+                 -0.0732, 0.0245, 0.0598, -0.0356, -0.0634, 0.0321, -0.0875, 0.0158
+            };
+            //------------------------------------------------------------
+
+            //Create the tiles
+
+            for (int i = 0; i < numberOfTilesInRow * rows; i++)
+            {
+
+                int currentPositionX = startPositionX + widthHeight * i + spaceBetween * i;
+                Size currentSize = new Size(widthHeight, widthHeight);
+                Point currentPosition = new Point(currentPositionX, startPositionY);
+                string currentTicker = tickers[i];
+                double priceChange = priceChanges[i] * 100;
+                System.Drawing.Color color = MetroFramework.MetroColors.Green;
+                if(priceChange < 0) color  = MetroFramework.MetroColors.Red;
+
+                MetroFramework.Controls.MetroTile stockTile = new MetroFramework.Controls.MetroTile();
+                stockTile.Size = currentSize;
+                stockTile.Location = currentPosition;
+                stockTile.UseCustomBackColor = true;
+                stockTile.BackColor = color;
+                stockTile.Text = currentTicker;
+                stockTile.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+                stockTile.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+                StockWatchTiles.Add(stockTile);
+
+
+                Label currentLabel = new Label();
+                currentLabel.Size = currentSize;
+                currentLabel.Location = new Point(0, 0);
+                currentLabel.BackColor = System.Drawing.Color.Transparent;
+                currentLabel.Text = String.Format("{0:f2}%", priceChange);
+                currentLabel.Font = new Font(this.Font.FontFamily, 24, FontStyle.Bold);
+                currentLabel.TextAlign = ContentAlignment.MiddleCenter;
+                StockWatchLabels.Add(currentLabel);
+                stockTile.Controls.Add(currentLabel);
+
+                this.StockWatch.Controls.Add(stockTile);
+
+                if (i == numberOfTilesInRow - 1)
+                {
+                    startPositionY += +widthHeight + spaceBetween;
+                    startPositionX += -widthHeight * numberOfTilesInRow - spaceBetween * numberOfTilesInRow;
+                }
+                
+
+            }
+
+
+            //double priceChange = 0.0744;
+            //Stock1PercentageLabel.Text = String.Format("{0:f2}%", priceChange * 100);
+            //Stock1PercentageLabel.Font = new Font(this.Font.FontFamily, 30, FontStyle.Bold); ;
+            //if (priceChange < 0)
+            //{
+            //    Stock1Tile.Style = MetroFramework.MetroColorStyle.Red;
+            //}
+            //else
+            //{
+            //    Stock1Tile.Style = MetroFramework.MetroColorStyle.Green;
+            //}
         }
     }
 }

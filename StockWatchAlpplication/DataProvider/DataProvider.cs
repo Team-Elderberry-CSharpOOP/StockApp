@@ -8,10 +8,15 @@
 
     public class DataProvider
     {
+        const string dateFormat = "yyyy-MM-dd";
+        const int dateColumn = 0;
+        const int priceColumn = 6;
+        const char delimitor = ',';
+
         public static Index ProvideData(string ticker, DateTime startDate, DateTime endDate, string frequency)
         {
             string file = GetData.DownloadData(ticker, startDate, endDate, frequency);
-            var currentIndex = new Index("S&P500", ReadData(file));
+            var currentIndex = new Index(ticker, ReadData(file));
             return currentIndex;
         }
 
@@ -25,22 +30,20 @@
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
-                if (line.Contains("Date"))
-                {
-                    continue;
-                }
-
-                var values = line.Split(',');
-                DateTime date = DateTime.ParseExact(values[0], "yyyy-MM-dd", provider);
-                decimal price = decimal.Parse(values[6]);
+                if (line.Contains("Date")) continue;
+                
+                var values = line.Split(delimitor);
+                DateTime date = DateTime.ParseExact(values[dateColumn], dateFormat, provider);
+                decimal price = decimal.Parse(values[priceColumn]);
                 DataPoint currentDataPoint = new DataPoint(date, price);
                 allData.Add(currentDataPoint);
             };
 
-            //remove the data
+            //remove the file
             reader.Close();
             File.Delete(file);
             
+            //reorder data
             allData.Reverse();
             return allData;
         }

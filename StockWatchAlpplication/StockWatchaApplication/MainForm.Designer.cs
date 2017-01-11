@@ -43,7 +43,7 @@
             this.StockIndex2Label = new MetroFramework.Controls.MetroLabel();
             this.StockIndexLineChart = new LiveCharts.WinForms.CartesianChart();
             this.StockIndex1Label = new MetroFramework.Controls.MetroLabel();
-            this.NewsTab = new MetroFramework.Controls.MetroTabPage();
+            this.StockWatch = new MetroFramework.Controls.MetroTabPage();
             this.UserPictureBox = new System.Windows.Forms.PictureBox();
             this.UsernameLabel = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.FormStyleManager)).BeginInit();
@@ -71,10 +71,10 @@
             // TabController
             // 
             this.TabController.Controls.Add(this.MerketOverviewTab);
-            this.TabController.Controls.Add(this.NewsTab);
+            this.TabController.Controls.Add(this.StockWatch);
             this.TabController.Location = new System.Drawing.Point(23, 63);
             this.TabController.Name = "TabController";
-            this.TabController.SelectedIndex = 0;
+            this.TabController.SelectedIndex = 1;
             this.TabController.Size = new System.Drawing.Size(800, 475);
             this.TabController.TabIndex = 1;
             this.TabController.UseSelectable = true;
@@ -192,19 +192,19 @@
             this.StockIndex1Label.TabIndex = 2;
             this.StockIndex1Label.Text = "Stock Index 1: ";
             // 
-            // NewsTab
+            // StockWatch
             // 
-            this.NewsTab.HorizontalScrollbarBarColor = true;
-            this.NewsTab.HorizontalScrollbarHighlightOnWheel = false;
-            this.NewsTab.HorizontalScrollbarSize = 10;
-            this.NewsTab.Location = new System.Drawing.Point(4, 39);
-            this.NewsTab.Name = "NewsTab";
-            this.NewsTab.Size = new System.Drawing.Size(792, 432);
-            this.NewsTab.TabIndex = 1;
-            this.NewsTab.Text = "Market News";
-            this.NewsTab.VerticalScrollbarBarColor = true;
-            this.NewsTab.VerticalScrollbarHighlightOnWheel = false;
-            this.NewsTab.VerticalScrollbarSize = 10;
+            this.StockWatch.HorizontalScrollbarBarColor = true;
+            this.StockWatch.HorizontalScrollbarHighlightOnWheel = false;
+            this.StockWatch.HorizontalScrollbarSize = 10;
+            this.StockWatch.Location = new System.Drawing.Point(4, 38);
+            this.StockWatch.Name = "StockWatch";
+            this.StockWatch.Size = new System.Drawing.Size(792, 433);
+            this.StockWatch.TabIndex = 1;
+            this.StockWatch.Text = "Stock Watch";
+            this.StockWatch.VerticalScrollbarBarColor = true;
+            this.StockWatch.VerticalScrollbarHighlightOnWheel = false;
+            this.StockWatch.VerticalScrollbarSize = 10;
             // 
             // UserPictureBox
             // 
@@ -257,7 +257,7 @@
         private MetroFramework.Controls.MetroTabControl TabController;
         private MetroFramework.Controls.MetroTabPage MerketOverviewTab;
         private MetroFramework.Controls.MetroLabel StockIndex1Label;
-        private MetroFramework.Controls.MetroTabPage NewsTab;
+        private MetroFramework.Controls.MetroTabPage StockWatch;
         private MetroFramework.Controls.MetroLabel StartDateLabel;
         private MetroFramework.Controls.MetroDateTime ChooseStartDate;
         private MetroFramework.Controls.MetroDateTime ChooseEndDate;
