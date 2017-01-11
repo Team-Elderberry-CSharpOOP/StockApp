@@ -6,13 +6,15 @@
 
     internal static class GetData
     {
+        const string fileDirectory = @"../../Resources/Data/{0}.csv";
+
         #region DownloadData
         //downloading the data from yahoo finance
         internal static string DownloadData(string ticker, DateTime startDate, DateTime endDate, string frequency)
         {
             var webClient = new WebClient();
             string url = BuildUrl(ticker, startDate, endDate, frequency);
-            string directory = string.Format(@"../../Resources/Data/{0}.csv", ticker);
+            string directory = string.Format(fileDirectory, ticker);
             webClient.DownloadFile(url, directory);
             return directory;
         }
