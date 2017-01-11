@@ -12,7 +12,7 @@
         {
             var webClient = new WebClient();
             string url = BuildUrl(ticker, startDate, endDate, frequency);
-            string directory = string.Format(@"../../Recourses/Data/{0}.csv", ticker);
+            string directory = string.Format(@"../../Resources/Data/{0}.csv", ticker);
             webClient.DownloadFile(url, directory);
             return directory;
         }
