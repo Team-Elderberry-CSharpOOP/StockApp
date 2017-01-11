@@ -74,7 +74,7 @@
             this.TabController.Controls.Add(this.StockWatch);
             this.TabController.Location = new System.Drawing.Point(23, 63);
             this.TabController.Name = "TabController";
-            this.TabController.SelectedIndex = 1;
+            this.TabController.SelectedIndex = 0;
             this.TabController.Size = new System.Drawing.Size(800, 475);
             this.TabController.TabIndex = 1;
             this.TabController.UseSelectable = true;
@@ -131,6 +131,7 @@
             this.ChooseEndDate.Name = "ChooseEndDate";
             this.ChooseEndDate.Size = new System.Drawing.Size(210, 29);
             this.ChooseEndDate.TabIndex = 8;
+            this.ChooseEndDate.ValueChanged += new System.EventHandler(this.ChooseEndDate_ValueChanged);
             // 
             // ChooseStartDate
             // 

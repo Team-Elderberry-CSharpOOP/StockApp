@@ -94,7 +94,9 @@
             ChooseStockIndex2.SelectedIndex = ChooseStockIndex2.FindStringExact("");
             #endregion
 
+            #region Second Tab - Stock Watch
             AddTilesSecondTab();
+            #endregion
         }
 
         private void ChooseStockIndex1_SelectedIndexChanged(object sender, EventArgs e)
@@ -141,7 +143,15 @@
         private void UpdateSecondSeries()
         {
             //Second Data Serires
-            if (ChooseStockIndex2.SelectedItem == null || GetComboBoxKey(ChooseStockIndex2) == "") return;
+            if (ChooseStockIndex2.SelectedItem == null) return;
+            if (GetComboBoxKey(ChooseStockIndex2) == "")
+            {
+                if (StockIndexLineChart.Series.Count == 2)
+                {
+                    StockIndexLineChart.Series.Remove(StockIndexLineChart.Series[1]);
+                }
+                return;
+            }
 
             string ticker2 = GetComboBoxValue(ChooseStockIndex2);
 
@@ -199,6 +209,31 @@
 
         private void ChooseStartDate_ValueChanged(object sender, EventArgs e)
         {
+            DateChanged();
+        }
+
+        private void ChooseEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateChanged();
+        }
+
+        private void DateChanged()
+        {
+            //Validate
+            if (GetDate(ChooseEndDate) < GetDate(ChooseStartDate))
+            {
+                MessageBox.Show("The end date cannot be before the startDate", "Invalid input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (GetDate(ChooseEndDate).Subtract(GetDate(ChooseStartDate)).TotalDays > 365 * 2)
+            {
+               DialogResult result =  MessageBox.Show("Please note that if you select a range longer than 2 years, the perfomance will degrate. Do you want to proceed?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.No)
+                {
+                    return;
+                } 
+            }
             UpdateFirstSeries();
             UpdateSecondSeries();
         }
@@ -206,16 +241,18 @@
         private void AddTilesSecondTab()
         {
             const int widthHeight = 180;
-            const int spaceBetween = 25;
+            const int spaceBetween = 24;
             const int numberOfTilesInRow = 4;
             const int rows = 2;
             int startPositionX = 0;
             int startPositionY = 30;
             List<MetroFramework.Controls.MetroTile> StockWatchTiles = new List<MetroFramework.Controls.MetroTile>();
             List<Label> StockWatchLabels = new List<Label>();
+            System.Drawing.Color greenColor = System.Drawing.Color.FromArgb(170, 0, 177, 89);
+            System.Drawing.Color redColor = System.Drawing.Color.FromArgb(170, 209, 17, 65);
 
             //TO BE DELETED - should download and update data frequently
-            List<string>tickers = new List<string>
+            List<string> tickers = new List<string>
             {
                 "AAPL","IBM","GOOG","TSLA","YHOO","BABA", "GE", "GM"
             };
@@ -236,53 +273,42 @@
                 Point currentPosition = new Point(currentPositionX, startPositionY);
                 string currentTicker = tickers[i];
                 double priceChange = priceChanges[i] * 100;
-                System.Drawing.Color color = MetroFramework.MetroColors.Green;
-                if(priceChange < 0) color  = MetroFramework.MetroColors.Red;
+                System.Drawing.Color color = greenColor;
+                if (priceChange < 0) color = redColor;
+
 
                 MetroFramework.Controls.MetroTile stockTile = new MetroFramework.Controls.MetroTile();
                 stockTile.Size = currentSize;
-                stockTile.Location = currentPosition;
+                stockTile.Location = new Point(0, 0);
                 stockTile.UseCustomBackColor = true;
-                stockTile.BackColor = color;
+                stockTile.BackColor = System.Drawing.Color.Transparent;
                 stockTile.Text = currentTicker;
                 stockTile.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
                 stockTile.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
                 StockWatchTiles.Add(stockTile);
 
-
                 Label currentLabel = new Label();
                 currentLabel.Size = currentSize;
-                currentLabel.Location = new Point(0, 0);
-                currentLabel.BackColor = System.Drawing.Color.Transparent;
+                currentLabel.Location = currentPosition;
+                currentLabel.BackColor = color;
                 currentLabel.Text = String.Format("{0:f2}%", priceChange);
                 currentLabel.Font = new Font(this.Font.FontFamily, 24, FontStyle.Bold);
                 currentLabel.TextAlign = ContentAlignment.MiddleCenter;
                 StockWatchLabels.Add(currentLabel);
-                stockTile.Controls.Add(currentLabel);
 
-                this.StockWatch.Controls.Add(stockTile);
+                currentLabel.Controls.Add(stockTile);
+                StockWatch.Controls.Add(currentLabel);
+
 
                 if (i == numberOfTilesInRow - 1)
                 {
                     startPositionY += +widthHeight + spaceBetween;
                     startPositionX += -widthHeight * numberOfTilesInRow - spaceBetween * numberOfTilesInRow;
                 }
-                
 
             }
-
-
-            //double priceChange = 0.0744;
-            //Stock1PercentageLabel.Text = String.Format("{0:f2}%", priceChange * 100);
-            //Stock1PercentageLabel.Font = new Font(this.Font.FontFamily, 30, FontStyle.Bold); ;
-            //if (priceChange < 0)
-            //{
-            //    Stock1Tile.Style = MetroFramework.MetroColorStyle.Red;
-            //}
-            //else
-            //{
-            //    Stock1Tile.Style = MetroFramework.MetroColorStyle.Green;
-            //}
         }
+
+
     }
 }
