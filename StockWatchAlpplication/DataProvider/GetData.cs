@@ -10,6 +10,7 @@
 
         #region DownloadData
         //downloading the data from yahoo finance
+        
         internal static string DownloadData(string ticker, DateTime startDate, DateTime endDate, string frequency)
         {
             var webClient = new WebClient();

@@ -15,6 +15,7 @@ namespace StockWatchApplication
             if (formLogin.DialogResult == DialogResult.OK)
             {
                 Application.Run(new MainForm(formLogin.Username));
+
             }
             else
             {

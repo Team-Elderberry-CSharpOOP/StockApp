@@ -22,8 +22,8 @@ namespace FinancialInstruments
             {"FTSE 100", @"^FTSE" }
         };
 
-        public List<DataPoint> Data { get; set; }
-        public string Ticker { get; set; }
+        public List<DataPoint> Data { get; private set; }
+        public string  Ticker { get; private set; }
 
     }
 }

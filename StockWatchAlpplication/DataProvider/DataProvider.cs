@@ -34,6 +34,7 @@
                 
                 var values = line.Split(delimitor);
                 DateTime date = DateTime.ParseExact(values[dateColumn], dateFormat, provider);
+                var a = values[priceColumn];
                 decimal price = decimal.Parse(values[priceColumn]);
                 DataPoint currentDataPoint = new DataPoint(date, price);
                 allData.Add(currentDataPoint);
