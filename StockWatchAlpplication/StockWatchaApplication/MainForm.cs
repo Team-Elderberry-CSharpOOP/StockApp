@@ -132,7 +132,7 @@
 
             ChartValues1 = new ChartValues<DataPoint>(currentIndex.Data);
 
-            //Indexer is not support. Thus, I need to remove the old Seris 
+            //Indexer is not support. Thus, I need to remove the old Series 
             this.StockIndexLineChart.Series.RemoveAt(0);
 
             this.StockIndexLineChart.Series.Insert(0, new LineSeries
@@ -251,7 +251,7 @@
             const int numberOfTilesInRow = 4;
             const int rows = 2;
             int startPositionX = 0;
-            int startPositionY = 30;
+            int startPositionY = 40;
 
             //Create the tiles
             for (int i = 0; i < numberOfTilesInRow * rows; i++)
@@ -303,26 +303,30 @@
 
         private static void UpdateSecondTabData()
         {
+            //green or red color is assigned according to the price change 
             System.Drawing.Color greenColor = System.Drawing.Color.FromArgb(170, 0, 177, 89);
             System.Drawing.Color redColor = System.Drawing.Color.FromArgb(170, 209, 17, 65);
 
+            //generate the new stock data
             List<Stock> allStocks = DataProvider.ProvideStockPriceChanges();
 
+            //update each label and tile separately
             for (int i = 0; i < StockWatchTiles.Count; i++)
             {
+                #region Blinking effect - for 0.015 seconds
+                StockWatchLabels[i].BackColor = System.Drawing.Color.White;
+                System.Threading.Thread.Sleep(15);
+                #endregion
+
+                #region UpdateThe information
                 string currentTicker = allStocks[i].Ticker;
                 decimal priceChange = allStocks[i].PercentagePriceChange.Price;
                 System.Drawing.Color color = greenColor;
                 if (priceChange < 0) color = redColor;
-
                 StockWatchTiles[i].Text = currentTicker;
-
-
-                StockWatchLabels[i].BackColor = System.Drawing.Color.White;
-                System.Threading.Thread.Sleep(15);
-
                 StockWatchLabels[i].BackColor = color;
                 StockWatchLabels[i].Text = String.Format("{0:f2}%", priceChange);
+                #endregion
             }
         }
     }
