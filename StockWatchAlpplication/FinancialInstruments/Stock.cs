@@ -1,8 +1,7 @@
 ﻿namespace FinancialInstruments
 {
-    public class Stock
+    public class Stock : FinancialInstrument
     {
-        public string Ticker { get; private set; }
         public DataPoint Data { get; private set; }
 
         public Stock(string ticker, DataPoint data)

@@ -15,7 +15,7 @@
 
         public static Index ProvideData(string ticker, DateTime startDate, DateTime endDate, string frequency)
         {
-            string file = GetData.DownloadData(ticker, startDate, endDate, frequency);
+            string file = GetData.ProvideDownloadedFile(ticker, startDate, endDate, frequency);
             var currentIndex = new Index(ticker, ReadData(file));
             return currentIndex;
         }

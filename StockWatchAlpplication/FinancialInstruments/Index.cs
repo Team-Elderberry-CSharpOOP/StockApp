@@ -1,10 +1,11 @@
-﻿
-namespace FinancialInstruments
+﻿namespace FinancialInstruments
 {
     using System.Collections.Generic;
 
-    public class Index
+    public class Index : FinancialInstrument
     {
+
+        public List<DataPoint> Data { get; private set; }
 
         public Index(string ticker, List<DataPoint> data)
         {
@@ -22,8 +23,6 @@ namespace FinancialInstruments
             {"FTSE 100", @"^FTSE" }
         };
 
-        public List<DataPoint> Data { get; private set; }
-        public string  Ticker { get; private set; }
 
     }
 }
