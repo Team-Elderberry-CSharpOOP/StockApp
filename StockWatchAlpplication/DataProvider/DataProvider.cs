@@ -14,7 +14,7 @@
         const int priceColumn = 6;
         const char delimitor = ',';
         const string tickerIdentifier = @"""t""";
-        const string exchangeIdentifier = @"""t""";
+        const string exchangeIdentifier = @"""e""";
         const string priceIdentifier = @"""l""";
         const string priceChangeIdentifier = @"""c""";
         const string percentagePriceChangeIdentifier = @"""cp""";
@@ -73,8 +73,6 @@
             CultureInfo provider = CultureInfo.InvariantCulture;
             StreamReader reader = new StreamReader(File.OpenRead(file));
             var allStocks = new List<Stock>();
-            var line = reader.ReadLine();
-            var data = line.Split(',');
 
             string ticker = null;
             string exchange = null;
@@ -84,40 +82,42 @@
             DateTime date = default(DateTime);
 
 
-            foreach (var item in data)
+            while (!reader.EndOfStream)
             {
+                string line = reader.ReadLine();
                 #region Search For Identifiers
-                if (item.Contains(tickerIdentifier))
+                if (line.Contains(tickerIdentifier))
                 {
-                    ticker = ExtractValueFromString(item, tickerIdentifier);
+                    ticker = ExtractValueFromString(line, tickerIdentifier);
                 }
-                else if (item.Contains(exchangeIdentifier))
+                else if (line.Contains(exchangeIdentifier))
                 {
-                    exchange = ExtractValueFromString(item, exchangeIdentifier);
+                    exchange = ExtractValueFromString(line, exchangeIdentifier);
                 }
-                else if (item.Contains(dateIdentifier))
+                else if (line.Contains(dateIdentifier))
                 {
-                    string dateTimeAsString = ExtractValueFromString(item, dateIdentifier);
-                    date = DateTime.Parse(dateTimeAsString, null, System.Globalization.DateTimeStyles.RoundtripKind);
+                    string dateTimeAsString = ExtractValueFromString(line, dateIdentifier);
+                    date = DateTime.Parse(dateTimeAsString, null, DateTimeStyles.RoundtripKind);
                 }
-                else if (item.Contains(priceIdentifier))
+                else if (line.Contains(priceIdentifier))
                 {
-                    price = decimal.Parse(ExtractValueFromString(item, priceIdentifier));
+                    string a = ExtractValueFromString(line, priceIdentifier);
+                    price = decimal.Parse(a);
                 }
-                else if (item.Contains(priceChangeIdentifier))
+                else if (line.Contains(priceChangeIdentifier))
                 {
-                    priceChange = decimal.Parse(ExtractValueFromString(item, priceChangeIdentifier));
+                    priceChange = decimal.Parse(ExtractValueFromString(line, priceChangeIdentifier));
                 }
-                else if (item.Contains(percentagePriceChangeIdentifier))
+                else if (line.Contains(percentagePriceChangeIdentifier))
                 {
-                    percentagePriceChange = decimal.Parse(ExtractValueFromString(item, percentagePriceChangeIdentifier));
+                    percentagePriceChange = decimal.Parse(ExtractValueFromString(line, percentagePriceChangeIdentifier));
                 }
                 #endregion
 
                 #region If all the data is collected
                 //Check if all the nessecary data is collected
-                if (string.IsNullOrEmpty(ticker) &&
-                    string.IsNullOrEmpty(exchange) &&
+                if (!string.IsNullOrEmpty(ticker) &&
+                    !string.IsNullOrEmpty(exchange) &&
                     price != decimal.MinValue &&
                     priceChange != decimal.MinValue &&
                     percentagePriceChange != decimal.MinValue &&
@@ -143,14 +143,15 @@
         //Extracts the value corresponding to the identier as string
         private static string ExtractValueFromString(string text, string identifier)
         {
-            int startIndex = text.Substring(identifier.IndexOf(identifier) + text.Length).IndexOf(doubleQuotes);
+            text = text.Substring(text.IndexOf(identifier) + identifier.Length + 1);
+            int startIndex = text.IndexOf(doubleQuotes) + 1;
             int length = text.LastIndexOf(doubleQuotes) - startIndex;
 
             return text.Substring(startIndex, length);
         }
 
         //Given the collected data create a new Stock
-        private static Stock CreateStock(string ticker, string exchange, DateTime date,  
+        private static Stock CreateStock(string ticker, string exchange, DateTime date,
                                          decimal price, decimal priceChange, decimal percentagePriceChange)
         {
             DataPoint datePrice = new DataPoint(date, price);

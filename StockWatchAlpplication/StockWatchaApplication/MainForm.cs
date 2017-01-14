@@ -11,6 +11,7 @@
     using System.Linq;
     using System.Windows.Forms;
     using System.Windows.Media;
+    using Data;
 
     public partial class MainForm : MetroFramework.Forms.MetroForm
     {
@@ -118,7 +119,7 @@
 
             string ticker1 = GetComboBoxValue(ChooseStockIndex1);
 
-            Index currentIndex = Data.DataProvider.ProvideIndexSeries(
+            Index currentIndex = DataProvider.ProvideIndexSeries(
                 ticker1,
                 GetDate(ChooseStartDate),
                 GetDate(ChooseEndDate),
@@ -155,7 +156,7 @@
 
             string ticker2 = GetComboBoxValue(ChooseStockIndex2);
 
-            Index additionalIndex = Data.DataProvider.ProvideIndexSeries(
+            Index additionalIndex = DataProvider.ProvideIndexSeries(
             ticker2,
             GetDate(ChooseStartDate),
             GetDate(ChooseEndDate),
@@ -251,17 +252,7 @@
             System.Drawing.Color greenColor = System.Drawing.Color.FromArgb(170, 0, 177, 89);
             System.Drawing.Color redColor = System.Drawing.Color.FromArgb(170, 209, 17, 65);
 
-            //TO BE DELETED - should download and update data frequently
-            List<string> tickers = new List<string>
-            {
-                "AAPL","IBM","GOOG","TSLA","YHOO","BABA", "GE", "GM"
-            };
-
-            List<double> priceChanges = new List<double>
-            {
-                 -0.0732, 0.0245, 0.0598, -0.0356, -0.0634, 0.0321, -0.0875, 0.0158
-            };
-            //------------------------------------------------------------
+            List<Stock> allStocks = DataProvider.ProvideStockPriceChanges();
 
             //Create the tiles
 
@@ -271,8 +262,8 @@
                 int currentPositionX = startPositionX + widthHeight * i + spaceBetween * i;
                 Size currentSize = new Size(widthHeight, widthHeight);
                 Point currentPosition = new Point(currentPositionX, startPositionY);
-                string currentTicker = tickers[i];
-                double priceChange = priceChanges[i] * 100;
+                string currentTicker = allStocks[i].Ticker;
+                decimal priceChange = allStocks[i].PercentagePriceChange.Price;
                 System.Drawing.Color color = greenColor;
                 if (priceChange < 0) color = redColor;
 

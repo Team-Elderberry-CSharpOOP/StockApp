@@ -105,10 +105,10 @@
             // ChooseStockIndex2
             // 
             this.ChooseStockIndex2.FormattingEnabled = true;
-            this.ChooseStockIndex2.ItemHeight = 23;
-            this.ChooseStockIndex2.Location = new System.Drawing.Point(102, 52);
+            this.ChooseStockIndex2.ItemHeight = 24;
+            this.ChooseStockIndex2.Location = new System.Drawing.Point(111, 52);
             this.ChooseStockIndex2.Name = "ChooseStockIndex2";
-            this.ChooseStockIndex2.Size = new System.Drawing.Size(128, 29);
+            this.ChooseStockIndex2.Size = new System.Drawing.Size(128, 30);
             this.ChooseStockIndex2.TabIndex = 12;
             this.ChooseStockIndex2.UseSelectable = true;
             this.ChooseStockIndex2.SelectedIndexChanged += new System.EventHandler(this.ChooseStockIndex2_SelectedIndexChanged);
@@ -116,10 +116,10 @@
             // ChooseStockIndex1
             // 
             this.ChooseStockIndex1.FormattingEnabled = true;
-            this.ChooseStockIndex1.ItemHeight = 23;
-            this.ChooseStockIndex1.Location = new System.Drawing.Point(102, 12);
+            this.ChooseStockIndex1.ItemHeight = 24;
+            this.ChooseStockIndex1.Location = new System.Drawing.Point(111, 12);
             this.ChooseStockIndex1.Name = "ChooseStockIndex1";
-            this.ChooseStockIndex1.Size = new System.Drawing.Size(128, 29);
+            this.ChooseStockIndex1.Size = new System.Drawing.Size(128, 30);
             this.ChooseStockIndex1.TabIndex = 11;
             this.ChooseStockIndex1.UseSelectable = true;
             this.ChooseStockIndex1.SelectedIndexChanged += new System.EventHandler(this.ChooseStockIndex1_SelectedIndexChanged);
@@ -127,18 +127,18 @@
             // ChooseEndDate
             // 
             this.ChooseEndDate.Location = new System.Drawing.Point(582, 52);
-            this.ChooseEndDate.MinimumSize = new System.Drawing.Size(0, 29);
+            this.ChooseEndDate.MinimumSize = new System.Drawing.Size(0, 30);
             this.ChooseEndDate.Name = "ChooseEndDate";
-            this.ChooseEndDate.Size = new System.Drawing.Size(210, 29);
+            this.ChooseEndDate.Size = new System.Drawing.Size(210, 34);
             this.ChooseEndDate.TabIndex = 8;
             this.ChooseEndDate.ValueChanged += new System.EventHandler(this.ChooseEndDate_ValueChanged);
             // 
             // ChooseStartDate
             // 
             this.ChooseStartDate.Location = new System.Drawing.Point(582, 12);
-            this.ChooseStartDate.MinimumSize = new System.Drawing.Size(0, 29);
+            this.ChooseStartDate.MinimumSize = new System.Drawing.Size(0, 30);
             this.ChooseStartDate.Name = "ChooseStartDate";
-            this.ChooseStartDate.Size = new System.Drawing.Size(210, 29);
+            this.ChooseStartDate.Size = new System.Drawing.Size(210, 34);
             this.ChooseStartDate.TabIndex = 6;
             this.ChooseStartDate.ValueChanged += new System.EventHandler(this.ChooseStartDate_ValueChanged);
             // 
@@ -146,9 +146,9 @@
             // 
             this.EndDateLabel.AutoSize = true;
             this.EndDateLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.EndDateLabel.Location = new System.Drawing.Point(512, 62);
+            this.EndDateLabel.Location = new System.Drawing.Point(509, 62);
             this.EndDateLabel.Name = "EndDateLabel";
-            this.EndDateLabel.Size = new System.Drawing.Size(68, 19);
+            this.EndDateLabel.Size = new System.Drawing.Size(73, 20);
             this.EndDateLabel.TabIndex = 7;
             this.EndDateLabel.Text = "End Date:";
             // 
@@ -156,9 +156,9 @@
             // 
             this.StartDateLabel.AutoSize = true;
             this.StartDateLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.StartDateLabel.Location = new System.Drawing.Point(506, 22);
+            this.StartDateLabel.Location = new System.Drawing.Point(503, 22);
             this.StartDateLabel.Name = "StartDateLabel";
-            this.StartDateLabel.Size = new System.Drawing.Size(74, 19);
+            this.StartDateLabel.Size = new System.Drawing.Size(79, 20);
             this.StartDateLabel.TabIndex = 5;
             this.StartDateLabel.Text = "Start Date:";
             // 
@@ -168,7 +168,7 @@
             this.StockIndex2Label.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.StockIndex2Label.Location = new System.Drawing.Point(0, 56);
             this.StockIndex2Label.Name = "StockIndex2Label";
-            this.StockIndex2Label.Size = new System.Drawing.Size(107, 19);
+            this.StockIndex2Label.Size = new System.Drawing.Size(111, 20);
             this.StockIndex2Label.TabIndex = 10;
             this.StockIndex2Label.Text = "Stock Index 2: ";
             // 
@@ -189,7 +189,7 @@
             this.StockIndex1Label.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.StockIndex1Label.Location = new System.Drawing.Point(0, 16);
             this.StockIndex1Label.Name = "StockIndex1Label";
-            this.StockIndex1Label.Size = new System.Drawing.Size(107, 19);
+            this.StockIndex1Label.Size = new System.Drawing.Size(111, 20);
             this.StockIndex1Label.TabIndex = 2;
             this.StockIndex1Label.Text = "Stock Index 1: ";
             // 
@@ -223,7 +223,7 @@
             this.UsernameLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.UsernameLabel.Location = new System.Drawing.Point(667, 27);
             this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(89, 25);
+            this.UsernameLabel.Size = new System.Drawing.Size(92, 25);
             this.UsernameLabel.TabIndex = 3;
             this.UsernameLabel.Text = "Username";
             // 
@@ -255,7 +255,6 @@
         #endregion
         private MetroFramework.Components.MetroStyleManager FormStyleManager;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private MetroFramework.Controls.MetroTabControl TabController;
         private MetroFramework.Controls.MetroTabPage MerketOverviewTab;
         private MetroFramework.Controls.MetroLabel StockIndex1Label;
         private MetroFramework.Controls.MetroTabPage StockWatch;
@@ -269,6 +268,7 @@
         private MetroFramework.Controls.MetroComboBox ChooseStockIndex1;
         private System.Windows.Forms.PictureBox UserPictureBox;
         private MetroFramework.Controls.MetroLabel UsernameLabel;
+        private MetroFramework.Controls.MetroTabControl TabController;
     }
 }
 

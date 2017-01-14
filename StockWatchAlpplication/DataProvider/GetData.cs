@@ -7,7 +7,9 @@
 
     internal static class GetData
     {
-        const string fileDirectory = @"../../Resources/Data/{0}.csv";
+        const string fileDirectory = @"../../Resources/Data/{0}.{1}";
+        const string txtFileExtension = @"txt";
+        const string csvFileExtension = @"csv";
         const string urlDataSeriesPrototype = @"http://ichart.yahoo.com/table.csv?s={0}&a={1}&b={2}&c={3}&d={4}&e={5}&f={6}&g={7}&ignore=.csv";
         const string urlCurrentDataPrototype = @"http://finance.google.com/finance/info?client=ig&q={0}";
         const string currentDataFileName = "CurrenData";
@@ -17,13 +19,13 @@
         internal static string ProvideDownloadedFile(string ticker, DateTime startDate, DateTime endDate, string frequency)
         {
            string url = BuildUrl(ticker, startDate, endDate, frequency);
-           return  DownloadTheData(url, ticker);
+           return  DownloadTheData(url, ticker, csvFileExtension);
         }
 
         internal static string ProvideDownloadedFile()
         {
             string url = BuildUrl();
-            return DownloadTheData(url, currentDataFileName);
+            return DownloadTheData(url, currentDataFileName, txtFileExtension);
         }
         #endregion
 
@@ -68,10 +70,10 @@
         #endregion
 
         #region Download and Save the data
-        private static string DownloadTheData(string url, string fileName)
+        private static string DownloadTheData(string url, string fileName, string fileExtension)
         {
             var webClient = new WebClient();
-            string directory = string.Format(fileDirectory, fileName);
+            string directory = string.Format(fileDirectory, fileName, fileExtension);
             webClient.DownloadFile(url, directory);
             return directory;
         }
