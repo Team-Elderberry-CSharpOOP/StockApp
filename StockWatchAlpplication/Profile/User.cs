@@ -3,7 +3,7 @@
     using System;
     using System.Windows.Forms;
     using Firebase.Auth;
-    using Utils;
+    using Data;
 
     public class User : IUser
     {

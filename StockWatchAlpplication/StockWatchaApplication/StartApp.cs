@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace StockWatchApplication
+﻿namespace StockWatchApplication
 {
+    using System;
+    using System.Windows.Forms;
+
     static class StartApp
     {
         [STAThread]

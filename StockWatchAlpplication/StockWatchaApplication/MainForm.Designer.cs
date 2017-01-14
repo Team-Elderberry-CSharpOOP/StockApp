@@ -72,10 +72,10 @@
             // 
             this.TabController.Controls.Add(this.MerketOverviewTab);
             this.TabController.Controls.Add(this.StockWatch);
-            this.TabController.Location = new System.Drawing.Point(23, 63);
+            this.TabController.Location = new System.Drawing.Point(8, 63);
             this.TabController.Name = "TabController";
             this.TabController.SelectedIndex = 0;
-            this.TabController.Size = new System.Drawing.Size(800, 475);
+            this.TabController.Size = new System.Drawing.Size(828, 489);
             this.TabController.TabIndex = 1;
             this.TabController.UseSelectable = true;
             // 
@@ -90,12 +90,15 @@
             this.MerketOverviewTab.Controls.Add(this.StockIndex2Label);
             this.MerketOverviewTab.Controls.Add(this.StockIndexLineChart);
             this.MerketOverviewTab.Controls.Add(this.StockIndex1Label);
+            this.MerketOverviewTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MerketOverviewTab.HorizontalScrollbar = true;
             this.MerketOverviewTab.HorizontalScrollbarBarColor = true;
             this.MerketOverviewTab.HorizontalScrollbarHighlightOnWheel = false;
             this.MerketOverviewTab.HorizontalScrollbarSize = 10;
             this.MerketOverviewTab.Location = new System.Drawing.Point(4, 38);
+            this.MerketOverviewTab.Margin = new System.Windows.Forms.Padding(0);
             this.MerketOverviewTab.Name = "MerketOverviewTab";
-            this.MerketOverviewTab.Size = new System.Drawing.Size(792, 433);
+            this.MerketOverviewTab.Size = new System.Drawing.Size(820, 447);
             this.MerketOverviewTab.TabIndex = 0;
             this.MerketOverviewTab.Text = "Market Overview";
             this.MerketOverviewTab.VerticalScrollbarBarColor = true;
@@ -106,7 +109,7 @@
             // 
             this.ChooseStockIndex2.FormattingEnabled = true;
             this.ChooseStockIndex2.ItemHeight = 24;
-            this.ChooseStockIndex2.Location = new System.Drawing.Point(111, 52);
+            this.ChooseStockIndex2.Location = new System.Drawing.Point(138, 52);
             this.ChooseStockIndex2.Name = "ChooseStockIndex2";
             this.ChooseStockIndex2.Size = new System.Drawing.Size(128, 30);
             this.ChooseStockIndex2.TabIndex = 12;
@@ -117,7 +120,7 @@
             // 
             this.ChooseStockIndex1.FormattingEnabled = true;
             this.ChooseStockIndex1.ItemHeight = 24;
-            this.ChooseStockIndex1.Location = new System.Drawing.Point(111, 12);
+            this.ChooseStockIndex1.Location = new System.Drawing.Point(138, 12);
             this.ChooseStockIndex1.Name = "ChooseStockIndex1";
             this.ChooseStockIndex1.Size = new System.Drawing.Size(128, 30);
             this.ChooseStockIndex1.TabIndex = 11;
@@ -126,19 +129,21 @@
             // 
             // ChooseEndDate
             // 
-            this.ChooseEndDate.Location = new System.Drawing.Point(582, 52);
-            this.ChooseEndDate.MinimumSize = new System.Drawing.Size(0, 30);
+            this.ChooseEndDate.FontSize = MetroFramework.MetroDateTimeSize.Small;
+            this.ChooseEndDate.Location = new System.Drawing.Point(607, 52);
+            this.ChooseEndDate.MinimumSize = new System.Drawing.Size(0, 27);
             this.ChooseEndDate.Name = "ChooseEndDate";
-            this.ChooseEndDate.Size = new System.Drawing.Size(210, 34);
+            this.ChooseEndDate.Size = new System.Drawing.Size(210, 36);
             this.ChooseEndDate.TabIndex = 8;
             this.ChooseEndDate.ValueChanged += new System.EventHandler(this.ChooseEndDate_ValueChanged);
             // 
             // ChooseStartDate
             // 
-            this.ChooseStartDate.Location = new System.Drawing.Point(582, 12);
-            this.ChooseStartDate.MinimumSize = new System.Drawing.Size(0, 30);
+            this.ChooseStartDate.FontSize = MetroFramework.MetroDateTimeSize.Small;
+            this.ChooseStartDate.Location = new System.Drawing.Point(607, 12);
+            this.ChooseStartDate.MinimumSize = new System.Drawing.Size(0, 27);
             this.ChooseStartDate.Name = "ChooseStartDate";
-            this.ChooseStartDate.Size = new System.Drawing.Size(210, 34);
+            this.ChooseStartDate.Size = new System.Drawing.Size(210, 36);
             this.ChooseStartDate.TabIndex = 6;
             this.ChooseStartDate.ValueChanged += new System.EventHandler(this.ChooseStartDate_ValueChanged);
             // 
@@ -146,7 +151,7 @@
             // 
             this.EndDateLabel.AutoSize = true;
             this.EndDateLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.EndDateLabel.Location = new System.Drawing.Point(509, 62);
+            this.EndDateLabel.Location = new System.Drawing.Point(521, 56);
             this.EndDateLabel.Name = "EndDateLabel";
             this.EndDateLabel.Size = new System.Drawing.Size(73, 20);
             this.EndDateLabel.TabIndex = 7;
@@ -156,7 +161,7 @@
             // 
             this.StartDateLabel.AutoSize = true;
             this.StartDateLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.StartDateLabel.Location = new System.Drawing.Point(503, 22);
+            this.StartDateLabel.Location = new System.Drawing.Point(515, 16);
             this.StartDateLabel.Name = "StartDateLabel";
             this.StartDateLabel.Size = new System.Drawing.Size(79, 20);
             this.StartDateLabel.TabIndex = 5;
@@ -164,11 +169,11 @@
             // 
             // StockIndex2Label
             // 
-            this.StockIndex2Label.AutoSize = true;
+            this.StockIndex2Label.CausesValidation = false;
             this.StockIndex2Label.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.StockIndex2Label.Location = new System.Drawing.Point(0, 56);
+            this.StockIndex2Label.Location = new System.Drawing.Point(4, 56);
             this.StockIndex2Label.Name = "StockIndex2Label";
-            this.StockIndex2Label.Size = new System.Drawing.Size(111, 20);
+            this.StockIndex2Label.Size = new System.Drawing.Size(154, 20);
             this.StockIndex2Label.TabIndex = 10;
             this.StockIndex2Label.Text = "Stock Index 2: ";
             // 
@@ -177,19 +182,19 @@
             this.StockIndexLineChart.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.StockIndexLineChart.BackColorTransparent = true;
             this.StockIndexLineChart.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.StockIndexLineChart.Location = new System.Drawing.Point(-1, 83);
+            this.StockIndexLineChart.Location = new System.Drawing.Point(7, 88);
             this.StockIndexLineChart.Name = "StockIndexLineChart";
-            this.StockIndexLineChart.Size = new System.Drawing.Size(814, 354);
+            this.StockIndexLineChart.Size = new System.Drawing.Size(831, 354);
             this.StockIndexLineChart.TabIndex = 4;
             this.StockIndexLineChart.Text = "StockIndex";
             // 
             // StockIndex1Label
             // 
-            this.StockIndex1Label.AutoSize = true;
+            this.StockIndex1Label.CausesValidation = false;
             this.StockIndex1Label.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.StockIndex1Label.Location = new System.Drawing.Point(0, 16);
+            this.StockIndex1Label.Location = new System.Drawing.Point(4, 16);
             this.StockIndex1Label.Name = "StockIndex1Label";
-            this.StockIndex1Label.Size = new System.Drawing.Size(111, 20);
+            this.StockIndex1Label.Size = new System.Drawing.Size(154, 26);
             this.StockIndex1Label.TabIndex = 2;
             this.StockIndex1Label.Text = "Stock Index 1: ";
             // 
@@ -200,7 +205,7 @@
             this.StockWatch.HorizontalScrollbarSize = 10;
             this.StockWatch.Location = new System.Drawing.Point(4, 38);
             this.StockWatch.Name = "StockWatch";
-            this.StockWatch.Size = new System.Drawing.Size(792, 433);
+            this.StockWatch.Size = new System.Drawing.Size(829, 447);
             this.StockWatch.TabIndex = 1;
             this.StockWatch.Text = "Stock Watch";
             this.StockWatch.VerticalScrollbarBarColor = true;
@@ -230,12 +235,12 @@
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(846, 553);
+            this.ClientSize = new System.Drawing.Size(853, 553);
             this.Controls.Add(this.UserPictureBox);
             this.Controls.Add(this.UsernameLabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.TabController);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";

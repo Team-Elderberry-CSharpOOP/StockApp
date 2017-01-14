@@ -30,7 +30,7 @@
         #endregion
 
         #region Create URL
-        //creating the url with the provided infroamtion
+        //creating the url with the provided information
         private static string BuildUrl(string ticker, DateTime startDate, DateTime endDate, string frequency)
         {
             int startMonth = startDate.Month - 1; //in yahoo finance the months start from zero i.e Jannuary = 0

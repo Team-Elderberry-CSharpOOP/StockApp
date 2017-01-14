@@ -1,4 +1,4 @@
-﻿namespace Utils
+﻿namespace Data
 {
     using System;
     using System.ComponentModel;
@@ -39,6 +39,5 @@
                 this.OnElapsed(this, EventArgs.Empty);
             }
         }
-
     }
 }

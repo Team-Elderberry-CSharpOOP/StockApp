@@ -1,9 +1,11 @@
 ﻿namespace StockWatchApplication
 {
+    using Data;
     using FinancialInstruments;
     using LiveCharts;
     using LiveCharts.Configurations;
     using LiveCharts.Wpf;
+    using MetroFramework.Controls;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -11,18 +13,21 @@
     using System.Linq;
     using System.Windows.Forms;
     using System.Windows.Media;
-    using Data;
 
     public partial class MainForm : MetroFramework.Forms.MetroForm
     {
-        private CultureInfo provider = CultureInfo.InvariantCulture;
-        private ChartValues<DataPoint> ChartValues1 { get; set; }
-        private ChartValues<DataPoint> ChartValues2 { get; set; }
+        private static CultureInfo provider = CultureInfo.InvariantCulture;
+        private static ChartValues<DataPoint> ChartValues1 { get; set; }
+        private static ChartValues<DataPoint> ChartValues2 { get; set; }
+        private static List<MetroTile> StockWatchTiles = new List<MetroTile>();
+        private static List<Label> StockWatchLabels = new List<Label>();
+        private static IRequestTimer mt;
 
         public MainForm(string username)
         {
             InitializeComponent();
             InitializeFormAndChart(username);
+            StartTimer();
         }
 
         private void InitializeFormAndChart(string username)
@@ -229,11 +234,11 @@
 
             if (GetDate(ChooseEndDate).Subtract(GetDate(ChooseStartDate)).TotalDays > 365 * 2)
             {
-               DialogResult result =  MessageBox.Show("Please note that if you select a range longer than 2 years, the perfomance will degrate. Do you want to proceed?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("Please note that if you select a range longer than 2 years, the perfomance will degrate. Do you want to proceed?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.No)
                 {
                     return;
-                } 
+                }
             }
             UpdateFirstSeries();
             UpdateSecondSeries();
@@ -247,33 +252,19 @@
             const int rows = 2;
             int startPositionX = 0;
             int startPositionY = 30;
-            List<MetroFramework.Controls.MetroTile> StockWatchTiles = new List<MetroFramework.Controls.MetroTile>();
-            List<Label> StockWatchLabels = new List<Label>();
-            System.Drawing.Color greenColor = System.Drawing.Color.FromArgb(170, 0, 177, 89);
-            System.Drawing.Color redColor = System.Drawing.Color.FromArgb(170, 209, 17, 65);
-
-            List<Stock> allStocks = DataProvider.ProvideStockPriceChanges();
 
             //Create the tiles
-
             for (int i = 0; i < numberOfTilesInRow * rows; i++)
             {
-
                 int currentPositionX = startPositionX + widthHeight * i + spaceBetween * i;
                 Size currentSize = new Size(widthHeight, widthHeight);
                 Point currentPosition = new Point(currentPositionX, startPositionY);
-                string currentTicker = allStocks[i].Ticker;
-                decimal priceChange = allStocks[i].PercentagePriceChange.Price;
-                System.Drawing.Color color = greenColor;
-                if (priceChange < 0) color = redColor;
 
-
-                MetroFramework.Controls.MetroTile stockTile = new MetroFramework.Controls.MetroTile();
+                MetroTile stockTile = new MetroTile();
                 stockTile.Size = currentSize;
                 stockTile.Location = new Point(0, 0);
                 stockTile.UseCustomBackColor = true;
                 stockTile.BackColor = System.Drawing.Color.Transparent;
-                stockTile.Text = currentTicker;
                 stockTile.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
                 stockTile.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
                 StockWatchTiles.Add(stockTile);
@@ -281,8 +272,6 @@
                 Label currentLabel = new Label();
                 currentLabel.Size = currentSize;
                 currentLabel.Location = currentPosition;
-                currentLabel.BackColor = color;
-                currentLabel.Text = String.Format("{0:f2}%", priceChange);
                 currentLabel.Font = new Font(this.Font.FontFamily, 24, FontStyle.Bold);
                 currentLabel.TextAlign = ContentAlignment.MiddleCenter;
                 StockWatchLabels.Add(currentLabel);
@@ -290,16 +279,51 @@
                 currentLabel.Controls.Add(stockTile);
                 StockWatch.Controls.Add(currentLabel);
 
-
                 if (i == numberOfTilesInRow - 1)
                 {
                     startPositionY += +widthHeight + spaceBetween;
                     startPositionX += -widthHeight * numberOfTilesInRow - spaceBetween * numberOfTilesInRow;
                 }
-
             }
+
+            UpdateSecondTabData();
         }
 
+        private static void StartTimer()
+        {
+            // Request data on interval
+            mt = new RequestTimer();
+            mt.StartWithCallback(5000, OnTimerElapsed);
+        }
 
+        private static void OnTimerElapsed(object sender, EventArgs eventArgs)
+        {
+            UpdateSecondTabData();
+        }
+
+        private static void UpdateSecondTabData()
+        {
+            System.Drawing.Color greenColor = System.Drawing.Color.FromArgb(170, 0, 177, 89);
+            System.Drawing.Color redColor = System.Drawing.Color.FromArgb(170, 209, 17, 65);
+
+            List<Stock> allStocks = DataProvider.ProvideStockPriceChanges();
+
+            for (int i = 0; i < StockWatchTiles.Count; i++)
+            {
+                string currentTicker = allStocks[i].Ticker;
+                decimal priceChange = allStocks[i].PercentagePriceChange.Price;
+                System.Drawing.Color color = greenColor;
+                if (priceChange < 0) color = redColor;
+
+                StockWatchTiles[i].Text = currentTicker;
+
+
+                StockWatchLabels[i].BackColor = System.Drawing.Color.White;
+                System.Threading.Thread.Sleep(15);
+
+                StockWatchLabels[i].BackColor = color;
+                StockWatchLabels[i].Text = String.Format("{0:f2}%", priceChange);
+            }
+        }
     }
 }

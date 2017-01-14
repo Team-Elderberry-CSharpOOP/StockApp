@@ -137,10 +137,12 @@
                 #endregion
             }
 
+            reader.Close();
+            File.Delete(file);
             return allStocks;
         }
 
-        //Extracts the value corresponding to the identier as string
+        //Extracts the value corresponding to the identifier as string
         private static string ExtractValueFromString(string text, string identifier)
         {
             text = text.Substring(text.IndexOf(identifier) + identifier.Length + 1);
