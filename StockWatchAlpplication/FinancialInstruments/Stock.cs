@@ -2,12 +2,17 @@
 {
     public class Stock : FinancialInstrument
     {
-        public DataPoint Data { get; private set; }
+        public DataPoint PriceChange { get; private set; }
+        public DataPoint PercentagePriceChange { get; private set; }
+        public string Exchange { get; private set; }
 
-        public Stock(string ticker, DataPoint data)
+        public Stock(string ticker, DataPoint price, DataPoint priceChange, DataPoint percentagePriceChange, string exchange)
         {
             this.Ticker = ticker;
-            this.Data = data;
+            this.Price = price;
+            this.PriceChange = priceChange;
+            this.PercentagePriceChange = percentagePriceChange;
+            this.Exchange = exchange;
         }
     }
 }

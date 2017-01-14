@@ -4,7 +4,6 @@
 
     public class Index : FinancialInstrument
     {
-
         public List<DataPoint> Data { get; private set; }
 
         public Index(string ticker, List<DataPoint> data)
@@ -22,7 +21,6 @@
             {"DAX", @"^GDAXI" },
             {"FTSE 100", @"^FTSE" }
         };
-
 
     }
 }

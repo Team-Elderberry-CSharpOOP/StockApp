@@ -118,7 +118,7 @@
 
             string ticker1 = GetComboBoxValue(ChooseStockIndex1);
 
-            Index currentIndex = Data.DataProvider.ProvideData(
+            Index currentIndex = Data.DataProvider.ProvideIndexSeries(
                 ticker1,
                 GetDate(ChooseStartDate),
                 GetDate(ChooseEndDate),
@@ -155,7 +155,7 @@
 
             string ticker2 = GetComboBoxValue(ChooseStockIndex2);
 
-            Index additionalIndex = Data.DataProvider.ProvideData(
+            Index additionalIndex = Data.DataProvider.ProvideIndexSeries(
             ticker2,
             GetDate(ChooseStartDate),
             GetDate(ChooseEndDate),

@@ -4,7 +4,6 @@
 
     public struct DataPoint
     {
-
         public DataPoint(DateTime date, decimal price)
         {
             this.Date = date;
