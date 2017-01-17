@@ -41,16 +41,11 @@
             this.UsernameLabel.Text = username;
             #endregion
 
-            InitializeChart.InitializeMapper();
+            //InitializeChart.InitializeMapper();
 
-            InitializeChart.ZoomChart(this.StockIndexLineChart);
+            //InitializeChart.ZoomChart(this.StockIndexLineChart);
+            
 
-            //#region Chart
-            //StockIndexLineChart.Zoom = ZoomingOptions.X;
-
-            ////add the blank series -at least one series shown in the chart
-            //this.StockIndexLineChart.Series.Add(new LineSeries());
-            //#endregion
 
             #region DatePicker 1 and 2
             ChooseEndDate.Value = DateTime.Now;
