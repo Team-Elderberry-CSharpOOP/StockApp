@@ -1,7 +1,10 @@
+
 # StockApp
+<img src="http://1.bp.blogspot.com/-RxXQozwH4fE/VTVcgUzoPNI/AAAAAAAADpQ/evpuE_ha97M/s1600/NOT%2BELDERBERRY'S.JPG" width="150px" align="right">
 C# OOP | Team Elderberry | Line-of-business-application
 ### Team Members
 The following team members were randomly chosen to participate in the team project assignment as **Team 'Elderberry'**:
+
 
 | Name             | *Username*           |
 | -----------------| ---------------------|
