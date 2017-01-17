@@ -41,9 +41,7 @@
             this.UsernameLabel.Text = username;
             #endregion
 
-            //InitializeChart.InitializeMapper();
-
-            //InitializeChart.ZoomChart(this.StockIndexLineChart);
+            InitializeChart.InitializeAll(this.StockIndexLineChart);
             
 
 
@@ -65,23 +63,7 @@
             ChooseStockIndex2.ValueMember = "Value";
             #endregion
 
-            #region Chart Axis
-            this.StockIndexLineChart.AxisX.Add(new Axis
-            {
-                LabelFormatter = value => new System.DateTime((long)value).ToString("dd.MM.yyyy"),
-                FontSize = 13.0,
-                Separator = new Separator
-                {
-                    IsEnabled = false
-                }
-            });
-
-            this.StockIndexLineChart.AxisY.Add(new Axis
-            {
-                FontSize = 15.0,
-                LabelFormatter = value => String.Format("${0,000}", value),
-            });
-            #endregion
+            
 
             #region Chart Series
             ChooseStockIndex1.SelectedItem = ChooseStockIndex1.Items.OfType<KeyValuePair<string, string>>()
