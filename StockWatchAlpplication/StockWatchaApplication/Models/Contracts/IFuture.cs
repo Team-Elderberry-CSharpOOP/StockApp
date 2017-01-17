@@ -1,6 +1,6 @@
 ﻿namespace StockWatchApplication.Models.Contracts
 {
-    public interface IFuture : IFinancialInstrument, IDerivative
+    public interface IFuture : IDerivative
     {
         long ContractSize { get; }
     }

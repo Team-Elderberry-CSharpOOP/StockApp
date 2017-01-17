@@ -5,9 +5,8 @@
     using System.Collections.Generic;
     using Utils;
 
-    public class Stock : FinancialInstrument, IStock, IFinancialInstrument
+    public class Stock : FinancialInstrument, IStock, IHistoricalDataAvailable
     {
-        
         public Stock(string name, DataPoint currentPrice, StockTicker ticker, DataPoint priceChange, DataPoint percentagePriceChange, Exchange exchange)
             : base(name, currentPrice)
         {

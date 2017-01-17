@@ -5,7 +5,7 @@
     using Contracts;
     using Utils;
 
-    public class Index : FinancialInstrument, IIndex, IFinancialInstrument, IHistoricalDataAvailable
+    public class Index : FinancialInstrument, IIndex, IHistoricalDataAvailable
     {
         private const string InvalidIndexExceptionMessage = "Index not found";
 

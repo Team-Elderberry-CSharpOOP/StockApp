@@ -4,12 +4,13 @@
     using Contracts;
     using Utils;
 
-    public class Future : FinancialInstrument, IFuture, IDerivative, IFinancialInstrument
+    public class Future : Derivative, IFuture
     {
         protected const string InvalidContractSizeExceptionMessage = "Contract size cannot be less or equal to zero";
         private long contractSize;
 
-        public Future(string name, DataPoint currentPrice, long contractSize, string underlying) : base(name, currentPrice)
+        public Future(string name, DataPoint currentPrice, long contractSize, string underlying) 
+            : base(name, currentPrice, underlying)
         {
             this.ContractSize = contractSize;
         }
@@ -31,6 +32,5 @@
             }
         }
 
-        public string Underlying { get; }
     }
 }

@@ -104,6 +104,7 @@
     <Compile Include="Models\Contracts\IIndex.cs" />
     <Compile Include="Models\Contracts\IOption.cs" />
     <Compile Include="Models\Contracts\IStock.cs" />
+    <Compile Include="Models\Derivative.cs" />
     <Compile Include="Models\Enum\Exchange.cs" />
     <Compile Include="Models\Enum\OptionType.cs" />
     <Compile Include="Models\Enum\StockTicker.cs" />
@@ -142,6 +143,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
