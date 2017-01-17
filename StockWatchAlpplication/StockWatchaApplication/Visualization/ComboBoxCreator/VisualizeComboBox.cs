@@ -7,7 +7,6 @@ using System.Windows.Forms;
 
 namespace StockWatchApplication.Visualization.ComboBoxCreator
 {
-
     public static class VisualizeComboBox
     {
 
@@ -21,8 +20,7 @@ namespace StockWatchApplication.Visualization.ComboBoxCreator
         }
 
 
-
-        internal static string GetComboBoxKey(ComboBox comboBox)
+        public static string GetComboBoxKey(ComboBox comboBox)
         {
             if (comboBox.SelectedItem == null)
             {
@@ -31,7 +29,8 @@ namespace StockWatchApplication.Visualization.ComboBoxCreator
             return ((KeyValuePair<string, string>)comboBox.SelectedItem).Key;
         }
 
-        internal static string GetComboBoxValue(ComboBox comboBox)
+
+        public static string GetComboBoxValue(ComboBox comboBox)
         {
             if (comboBox.SelectedItem == null)
             {
@@ -40,6 +39,7 @@ namespace StockWatchApplication.Visualization.ComboBoxCreator
             return ((KeyValuePair<string, string>)comboBox.SelectedItem).Value;
         }
         
+
         public static void InitializeComboBoxes(ComboBox c1, ComboBox c2)
         {
             c1.SelectedItem = c1.Items.OfType<KeyValuePair<string, string>>()

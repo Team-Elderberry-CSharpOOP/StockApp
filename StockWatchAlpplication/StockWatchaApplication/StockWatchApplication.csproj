@@ -127,7 +127,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contracts\" />
     <Folder Include="Resources\" />
     <Folder Include="Visualization\Utils\" />
   </ItemGroup>

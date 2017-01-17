@@ -14,9 +14,10 @@
     using System.Windows.Forms;
     using System.Windows.Media;
     using StockWatchApplication.Visualization;
-    using Visualization.ComboBoxCreator;
+    using StockWatchApplication.Visualization.ComboBoxCreator;
     using StockWatchApplication.Visualization.Chart;
     using StockWatchApplication.Visualization.TilesCreator;
+    using StockWatchApplication.Visualization.DatePickerCreator;
 
     public partial class MainForm : MetroFramework.Forms.MetroForm
     {
@@ -60,8 +61,6 @@
             ChooseStockIndex2.ValueMember = "Value";
             #endregion
 
-
-
             #region Chart Series
             ChooseStockIndex1.SelectedItem = ChooseStockIndex1.Items.OfType<KeyValuePair<string, string>>()
                                             .ToList().Select(x => x.Key == "S&&P 500").First();
@@ -76,64 +75,26 @@
             #endregion
         }
 
-
-
         private void ChooseStockIndex1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IfComboBoxesTheSame();
+            VisualizeComboBox.IfComboBoxesTheSame(ChooseStockIndex1, ChooseStockIndex2);
             UpdateChartData.UpdateFirstSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
         }
 
         private void ChooseStockIndex2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IfComboBoxesTheSame();
+            VisualizeComboBox.IfComboBoxesTheSame(ChooseStockIndex1, ChooseStockIndex2);
             UpdateChartData.UpdateSecondSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
-        }
-
-
-        private DateTime GetDate(DateTimePicker datePicker)
-        {
-            return datePicker.Value;
-        }
-
-        private void IfComboBoxesTheSame()
-        {
-            if (VisualizeComboBox.GetComboBoxKey(ChooseStockIndex1) == VisualizeComboBox.GetComboBoxKey(ChooseStockIndex2))
-            {
-                ChooseStockIndex2.SelectedItem = ChooseStockIndex2.Items.OfType<KeyValuePair<string, string>>().ToList().Select(x => x.Key == "").First();
-                ChooseStockIndex2.SelectedIndex = ChooseStockIndex2.FindStringExact("");
-            }
         }
 
         private void ChooseStartDate_ValueChanged(object sender, EventArgs e)
         {
-            DateChanged();
+            CreateDatePicker.DateChanged(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
         }
 
         private void ChooseEndDate_ValueChanged(object sender, EventArgs e)
         {
-            DateChanged();
-        }
-
-        private void DateChanged()
-        {
-            //Validate
-            if (GetDate(ChooseEndDate) < GetDate(ChooseStartDate))
-            {
-                MessageBox.Show("The end date cannot be before the startDate", "Invalid input", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (GetDate(ChooseEndDate).Subtract(GetDate(ChooseStartDate)).TotalDays > 365 * 2)
-            {
-                DialogResult result = MessageBox.Show("Please note that if you select a range longer than 2 years, the perfomance will degrate. Do you want to proceed?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    return;
-                }
-            }
-            UpdateChartData.UpdateFirstSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
-            UpdateChartData.UpdateSecondSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
+            CreateDatePicker.DateChanged(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
         }
 
         private static void StartTimer()
@@ -147,7 +108,5 @@
         {
             CreateTiles.UpdateSecondTabData();
         }
-
-
     }
 }
