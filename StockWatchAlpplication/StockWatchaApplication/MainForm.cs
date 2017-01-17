@@ -43,12 +43,14 @@
 
             InitializeChart.InitializeMapper();
 
-            #region Chart
-            StockIndexLineChart.Zoom = ZoomingOptions.X;
+            InitializeChart.ZoomChart(this.StockIndexLineChart);
 
-            //add the blank series -at least one series shown in the chart
-            this.StockIndexLineChart.Series.Add(new LineSeries());
-            #endregion
+            //#region Chart
+            //StockIndexLineChart.Zoom = ZoomingOptions.X;
+
+            ////add the blank series -at least one series shown in the chart
+            //this.StockIndexLineChart.Series.Add(new LineSeries());
+            //#endregion
 
             #region DatePicker 1 and 2
             ChooseEndDate.Value = DateTime.Now;

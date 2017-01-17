@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LiveCharts.WinForms;
+using LiveCharts.Wpf;
 
 namespace StockWatchApplication.Visualization
 {
@@ -18,6 +20,14 @@ namespace StockWatchApplication.Visualization
                         .Y(point => (double)point.Price);
 
             Charting.For<DataPoint>(mapper);
+        }
+
+        public static void ZoomChart(LiveCharts.WinForms.CartesianChart input)
+        {
+            input.Zoom = ZoomingOptions.X;
+
+            //add the blank series -at least one series shown in the chart
+            input.Series.Add(new LineSeries());
         }
     }
 }
