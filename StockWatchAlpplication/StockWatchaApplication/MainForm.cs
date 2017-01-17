@@ -13,6 +13,7 @@
     using System.Linq;
     using System.Windows.Forms;
     using System.Windows.Media;
+    using StockWatchApplication.Visualization;
 
     public partial class MainForm : MetroFramework.Forms.MetroForm
     {
@@ -40,13 +41,7 @@
             this.UsernameLabel.Text = username;
             #endregion
 
-            #region Mapper for the Data in the Chart
-            var mapper = Mappers.Xy<DataPoint>()
-                        .X(point => point.Date.Ticks)
-                        .Y(point => (double)point.Price);
-
-            Charting.For<DataPoint>(mapper);
-            #endregion
+            InitializeChart.InitializeMapper();
 
             #region Chart
             StockIndexLineChart.Zoom = ZoomingOptions.X;
