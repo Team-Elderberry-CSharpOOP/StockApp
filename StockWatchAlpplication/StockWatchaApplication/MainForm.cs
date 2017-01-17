@@ -16,12 +16,11 @@
     using StockWatchApplication.Visualization;
     using Visualization.ComboBoxCreator;
     using StockWatchApplication.Visualization.Chart;
+    using StockWatchApplication.Visualization.TilesCreator;
 
     public partial class MainForm : MetroFramework.Forms.MetroForm
     {
         private static CultureInfo provider = CultureInfo.InvariantCulture;
-        private static List<MetroTile> StockWatchTiles = new List<MetroTile>();
-        private static List<Label> StockWatchLabels = new List<Label>();
         private static IRequestTimer mt;
 
         public MainForm(string username)
@@ -42,7 +41,7 @@
             #endregion
 
             InitializeChart.InitializeAll(this.StockIndexLineChart);
-            
+
             #region DatePicker 1 and 2
             ChooseEndDate.Value = DateTime.Now;
             ChooseStartDate.Value = DateTime.Now.AddMonths(-6);
@@ -61,7 +60,7 @@
             ChooseStockIndex2.ValueMember = "Value";
             #endregion
 
-            
+
 
             #region Chart Series
             ChooseStockIndex1.SelectedItem = ChooseStockIndex1.Items.OfType<KeyValuePair<string, string>>()
@@ -73,9 +72,11 @@
             #endregion
 
             #region Second Tab - Stock Watch
-            AddTilesSecondTab();
+            CreateTiles.AddTilesSecondTab(this.Font, this.StockWatch);
             #endregion
         }
+
+
 
         private void ChooseStockIndex1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -89,75 +90,6 @@
             UpdateChartData.UpdateSecondSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
         }
 
-
-        // MOVED TO UpdateChartData.cs
-
-
-        //private void UpdateFirstSeries()
-        //{
-        //    //First Data Series
-        //    if (ChooseStockIndex1.SelectedItem == null) return;
-
-        //    string ticker1 = VisualizeComboBox.GetComboBoxValue(ChooseStockIndex1);
-
-        //    Index currentIndex = DataProvider.ProvideIndexSeries(
-        //        ticker1,
-        //        GetDate(ChooseStartDate),
-        //        GetDate(ChooseEndDate),
-        //        "d");
-
-        //    ChartValues1 = new ChartValues<DataPoint>(currentIndex.Data);
-
-        //    //Indexer is not support. Thus, I need to remove the old Series 
-        //    this.StockIndexLineChart.Series.RemoveAt(0);
-
-        //    this.StockIndexLineChart.Series.Insert(0, new LineSeries
-        //    {
-        //        Title = VisualizeComboBox.GetComboBoxKey(ChooseStockIndex1),
-        //        Values = ChartValues1,
-        //        PointGeometry = null,
-        //        Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 174, 219)),
-        //        Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(35, 0, 174, 219)),
-        //        StrokeThickness = 2.5
-        //    });
-        //}
-
-        //private void UpdateSecondSeries()
-        //{
-        //    //Second Data Serires
-        //    if (ChooseStockIndex2.SelectedItem == null) return;
-        //    if (VisualizeComboBox.GetComboBoxKey(ChooseStockIndex2) == "")
-        //    {
-        //        if (StockIndexLineChart.Series.Count == 2)
-        //        {
-        //            StockIndexLineChart.Series.Remove(StockIndexLineChart.Series[1]);
-        //        }
-        //        return;
-        //    }
-
-        //    string ticker2 = VisualizeComboBox.GetComboBoxValue(ChooseStockIndex2);
-
-        //    Index additionalIndex = DataProvider.ProvideIndexSeries(
-        //    ticker2,
-        //    GetDate(ChooseStartDate),
-        //    GetDate(ChooseEndDate),
-        //    "d");
-
-        //    ChartValues2 = new ChartValues<DataPoint>(additionalIndex.Data);
-
-        //    if (StockIndexLineChart.Series.Count == 2) StockIndexLineChart.Series.RemoveAt(1);
-        //    StockIndexLineChart.Series.Add(new LineSeries
-        //    {
-        //        Title = VisualizeComboBox.GetComboBoxKey(ChooseStockIndex2),
-        //        Values = ChartValues2,
-        //        PointGeometry = null,
-        //        Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(124, 65, 153)),
-        //        Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(35, 124, 65, 153)),
-        //        StrokeThickness = 2.5
-        //    });
-        //}
-
-        
 
         private DateTime GetDate(DateTimePicker datePicker)
         {
@@ -204,51 +136,6 @@
             UpdateChartData.UpdateSecondSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
         }
 
-        private void AddTilesSecondTab()
-        {
-            const int widthHeight = 180;
-            const int spaceBetween = 24;
-            const int numberOfTilesInRow = 4;
-            const int rows = 2;
-            int startPositionX = 0;
-            int startPositionY = 40;
-
-            //Create the tiles
-            for (int i = 0; i < numberOfTilesInRow * rows; i++)
-            {
-                int currentPositionX = startPositionX + widthHeight * i + spaceBetween * i;
-                Size currentSize = new Size(widthHeight, widthHeight);
-                Point currentPosition = new Point(currentPositionX, startPositionY);
-
-                MetroTile stockTile = new MetroTile();
-                stockTile.Size = currentSize;
-                stockTile.Location = new Point(0, 0);
-                stockTile.UseCustomBackColor = true;
-                stockTile.BackColor = System.Drawing.Color.Transparent;
-                stockTile.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-                stockTile.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-                StockWatchTiles.Add(stockTile);
-
-                Label currentLabel = new Label();
-                currentLabel.Size = currentSize;
-                currentLabel.Location = currentPosition;
-                currentLabel.Font = new Font(this.Font.FontFamily, 24, FontStyle.Bold);
-                currentLabel.TextAlign = ContentAlignment.MiddleCenter;
-                StockWatchLabels.Add(currentLabel);
-
-                currentLabel.Controls.Add(stockTile);
-                StockWatch.Controls.Add(currentLabel);
-
-                if (i == numberOfTilesInRow - 1)
-                {
-                    startPositionY += +widthHeight + spaceBetween;
-                    startPositionX += -widthHeight * numberOfTilesInRow - spaceBetween * numberOfTilesInRow;
-                }
-            }
-
-            UpdateSecondTabData();
-        }
-
         private static void StartTimer()
         {
             // Request data on interval
@@ -258,36 +145,9 @@
 
         private static void OnTimerElapsed(object sender, EventArgs eventArgs)
         {
-            UpdateSecondTabData();
+            CreateTiles.UpdateSecondTabData();
         }
 
-        private static void UpdateSecondTabData()
-        {
-            //green or red color is assigned according to the price change 
-            System.Drawing.Color greenColor = System.Drawing.Color.FromArgb(170, 0, 177, 89);
-            System.Drawing.Color redColor = System.Drawing.Color.FromArgb(170, 209, 17, 65);
 
-            //generate the new stock data
-            List<Stock> allStocks = DataProvider.ProvideStockPriceChanges();
-
-            //update each label and tile separately
-            for (int i = 0; i < StockWatchTiles.Count; i++)
-            {
-                #region Blinking effect - for 0.015 seconds
-                StockWatchLabels[i].BackColor = System.Drawing.Color.White;
-                System.Threading.Thread.Sleep(15);
-                #endregion
-
-                #region UpdateThe information
-                string currentTicker = allStocks[i].Ticker;
-                decimal priceChange = allStocks[i].PercentagePriceChange.Price;
-                System.Drawing.Color color = greenColor;
-                if (priceChange < 0) color = redColor;
-                StockWatchTiles[i].Text = currentTicker;
-                StockWatchLabels[i].BackColor = color;
-                StockWatchLabels[i].Text = String.Format("{0:f2}%", priceChange);
-                #endregion
-            }
-        }
     }
 }

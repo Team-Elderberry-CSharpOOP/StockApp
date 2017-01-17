@@ -7,8 +7,21 @@ using System.Windows.Forms;
 
 namespace StockWatchApplication.Visualization.ComboBoxCreator
 {
+
     public static class VisualizeComboBox
     {
+
+        public static void IfComboBoxesTheSame(ComboBox c1, ComboBox c2)
+        {
+            if (VisualizeComboBox.GetComboBoxKey(c1) == VisualizeComboBox.GetComboBoxKey(c2))
+            {
+                c2.SelectedItem = c2.Items.OfType<KeyValuePair<string, string>>().ToList().Select(x => x.Key == "").First();
+                c2.SelectedIndex = c2.FindStringExact("");
+            }
+        }
+
+
+
         internal static string GetComboBoxKey(ComboBox comboBox)
         {
             if (comboBox.SelectedItem == null)

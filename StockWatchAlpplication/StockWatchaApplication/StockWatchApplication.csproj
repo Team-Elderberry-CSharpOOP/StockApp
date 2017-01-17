@@ -94,6 +94,7 @@
     <Compile Include="Visualization\ChartCreator\UpdateChartData.cs" />
     <Compile Include="Visualization\ComboBoxCreator\VisualizeComboBox.cs" />
     <Compile Include="Visualization\DatePickerCreator\DatePicker.cs" />
+    <Compile Include="Visualization\TilesCreator\CreateTiles.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +127,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Contracts\" />
     <Folder Include="Resources\" />
     <Folder Include="Visualization\Utils\" />
   </ItemGroup>
