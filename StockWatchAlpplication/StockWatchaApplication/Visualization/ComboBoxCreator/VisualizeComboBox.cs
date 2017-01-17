@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace StockWatchApplication.Visualization.ComboBoxCreator
+﻿namespace StockWatchApplication.Visualization.ComboBoxCreator
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
     public static class VisualizeComboBox
     {
 
@@ -19,7 +16,6 @@ namespace StockWatchApplication.Visualization.ComboBoxCreator
             }
         }
 
-
         public static string GetComboBoxKey(ComboBox comboBox)
         {
             if (comboBox.SelectedItem == null)
@@ -29,7 +25,6 @@ namespace StockWatchApplication.Visualization.ComboBoxCreator
             return ((KeyValuePair<string, string>)comboBox.SelectedItem).Key;
         }
 
-
         public static string GetComboBoxValue(ComboBox comboBox)
         {
             if (comboBox.SelectedItem == null)
@@ -38,7 +33,6 @@ namespace StockWatchApplication.Visualization.ComboBoxCreator
             }
             return ((KeyValuePair<string, string>)comboBox.SelectedItem).Value;
         }
-        
 
         public static void InitializeComboBoxes(ComboBox c1, ComboBox c2)
         {

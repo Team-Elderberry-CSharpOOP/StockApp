@@ -1,41 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using FinancialInstruments;
-using Data;
-using StockWatchApplication.Visualization.ComboBoxCreator;
-using System.Windows.Media;
-using LiveCharts;
-using StockWatchApplication.Visualization.DatePickerCreator;
-using LiveCharts.Wpf;
-using MetroFramework.Controls;
-using LiveCharts.Configurations;
-
-namespace StockWatchApplication.Visualization.Chart
+﻿namespace StockWatchApplication.Visualization.Chart
 {
+    using ComboBoxCreator;
+    using Data.Providers;
+    using DatePickerCreator;
+    using LiveCharts;
+    using LiveCharts.Wpf;
+    using MetroFramework.Controls;
+    using Models.Utils;
+    using System.Windows.Forms;
+    using System.Windows.Media;
+
     public static class UpdateChartData
     {
         private static ChartValues<DataPoint> ChartValues1 { get; set; }
         private static ChartValues<DataPoint> ChartValues2 { get; set; }
 
+        //FirstSeries Update
         public static void UpdateFirstSeries(LiveCharts.WinForms.CartesianChart input, ComboBox combo1, ComboBox combo2, MetroDateTime startDate, MetroDateTime endDate)
         {
             //First Data Series
             if (combo1.SelectedItem == null) return;
 
-            string ticker1 = VisualizeComboBox.GetComboBoxValue(combo1);
+            string ticker1 = VisualizeComboBox.GetComboBoxKey(combo1);
 
-            Index currentIndex = DataProvider.ProvideIndexSeries(
+            var currentIndex = ProvideIndexHistoricalData.Provide(
                 ticker1,
                 CreateDatePicker.GetDate(startDate),
                 CreateDatePicker.GetDate(endDate),
                 "d");
 
-
-            ChartValues1 = new ChartValues<DataPoint>(currentIndex.Data);
+            ChartValues1 = new ChartValues<DataPoint>(currentIndex.HistoricalData);
 
             //Indexer is not support. Thus, I need to remove the old Series 
             input.Series.RemoveAt(0);
@@ -51,9 +45,10 @@ namespace StockWatchApplication.Visualization.Chart
             });
         }
 
+        //SecondSeries Update
         public static void UpdateSecondSeries(LiveCharts.WinForms.CartesianChart input, ComboBox c1, ComboBox c2, MetroDateTime startDate, MetroDateTime endDate)
         {
-            //Second Data Serires
+            //Second Data Series
             if (c2.SelectedItem == null) return;
             if (VisualizeComboBox.GetComboBoxKey(c2) == "")
             {
@@ -64,15 +59,15 @@ namespace StockWatchApplication.Visualization.Chart
                 return;
             }
 
-            string ticker2 = VisualizeComboBox.GetComboBoxValue(c2);
+            string ticker2 = VisualizeComboBox.GetComboBoxKey(c2);
 
-            Index additionalIndex = DataProvider.ProvideIndexSeries(
+            var additionalIndex = ProvideIndexHistoricalData.Provide(
             ticker2,
             CreateDatePicker.GetDate(startDate),
             CreateDatePicker.GetDate(endDate),
             "d");
 
-            ChartValues2 = new ChartValues<DataPoint>(additionalIndex.Data);
+            ChartValues2 = new ChartValues<DataPoint>(additionalIndex.HistoricalData);
 
             if (input.Series.Count == 2) input.Series.RemoveAt(1);
             input.Series.Add(new LineSeries
@@ -85,5 +80,6 @@ namespace StockWatchApplication.Visualization.Chart
                 StrokeThickness = 2.5
             });
         }
+
     }
 }

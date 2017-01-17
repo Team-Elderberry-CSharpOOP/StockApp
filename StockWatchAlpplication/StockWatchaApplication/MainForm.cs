@@ -1,23 +1,17 @@
 ﻿namespace StockWatchApplication
 {
-    using Data;
-    using FinancialInstruments;
-    using LiveCharts;
-    using LiveCharts.Configurations;
-    using LiveCharts.Wpf;
-    using MetroFramework.Controls;
     using System;
     using System.Collections.Generic;
-    using System.Drawing;
     using System.Globalization;
     using System.Linq;
     using System.Windows.Forms;
-    using System.Windows.Media;
-    using StockWatchApplication.Visualization;
-    using StockWatchApplication.Visualization.ComboBoxCreator;
-    using StockWatchApplication.Visualization.Chart;
-    using StockWatchApplication.Visualization.TilesCreator;
-    using StockWatchApplication.Visualization.DatePickerCreator;
+    using Timers;
+    using Models;
+    using Visualization;
+    using Visualization.Chart;
+    using Visualization.ComboBoxCreator;
+    using Visualization.DatePickerCreator;
+    using Visualization.TilesCreator;
 
     public partial class MainForm : MetroFramework.Forms.MetroForm
     {

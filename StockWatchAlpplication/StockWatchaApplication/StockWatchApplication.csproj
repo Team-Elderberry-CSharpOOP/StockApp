@@ -76,6 +76,15 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Creators\IndexCreator.cs" />
+    <Compile Include="Data\Creators\StockCreator.cs" />
+    <Compile Include="Data\Download\DownloadedFile.cs" />
+    <Compile Include="Data\Download\URLProvider.cs" />
+    <Compile Include="Data\DataReaders\ReadCurrentDataFromFile.cs" />
+    <Compile Include="Data\DataReaders\ReadHistoricalDataFromFile.cs" />
+    <Compile Include="Data\Providers\ProvideIndexHistoricalData.cs" />
+    <Compile Include="Data\Providers\ProvideStockCurrentData.cs" />
+    <Compile Include="Data\Validators\SampleValidator.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,12 +97,33 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contracts\IDerivative.cs" />
+    <Compile Include="Models\Contracts\IFinancialInstrument.cs" />
+    <Compile Include="Models\Contracts\IFuture.cs" />
+    <Compile Include="Models\Contracts\IHistoricalDataAvailable.cs" />
+    <Compile Include="Models\Contracts\IIndex.cs" />
+    <Compile Include="Models\Contracts\IOption.cs" />
+    <Compile Include="Models\Contracts\IStock.cs" />
+    <Compile Include="Models\Enum\Exchange.cs" />
+    <Compile Include="Models\Enum\OptionType.cs" />
+    <Compile Include="Models\Enum\StockTicker.cs" />
+    <Compile Include="Models\FinancialInstrument.cs" />
+    <Compile Include="Models\Future.cs" />
+    <Compile Include="Models\Index.cs" />
+    <Compile Include="Models\Option.cs" />
+    <Compile Include="Models\Stock.cs" />
+    <Compile Include="Models\Util\DataPoint.cs" />
+    <Compile Include="Models\Util\IndexTickers.cs" />
+    <Compile Include="Profile\IUser.cs" />
+    <Compile Include="Profile\User.cs" />
     <Compile Include="StartApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visualization\ChartCreator\InitializeChart.cs" />
     <Compile Include="Visualization\ChartCreator\UpdateChartData.cs" />
     <Compile Include="Visualization\ComboBoxCreator\VisualizeComboBox.cs" />
     <Compile Include="Visualization\DatePickerCreator\DatePicker.cs" />
+    <Compile Include="Timers\IRequestTimer.cs" />
+    <Compile Include="Timers\RequestTimer.cs" />
     <Compile Include="Visualization\TilesCreator\CreateTiles.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -128,21 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Visualization\Utils\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataProvider\Data.csproj">
-      <Project>{56455462-fcf8-4974-9451-077a2454951b}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FinancialInstruments\FinancialInstruments.csproj">
-      <Project>{0f64b39d-ad32-4120-9077-71ccdedfeb93}</Project>
-      <Name>FinancialInstruments</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Profile\Profile.csproj">
-      <Project>{11f02d5e-a4d2-4497-b2d5-145abe20cf3b}</Project>
-      <Name>Profile</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

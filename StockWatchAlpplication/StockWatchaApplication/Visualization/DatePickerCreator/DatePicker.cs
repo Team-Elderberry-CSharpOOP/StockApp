@@ -1,13 +1,12 @@
-﻿using MetroFramework.Controls;
-using StockWatchApplication.Visualization.Chart;
-using System;
-using System.Windows.Forms;
-
-namespace StockWatchApplication.Visualization.DatePickerCreator
+﻿namespace StockWatchApplication.Visualization.DatePickerCreator
 {
+    using System;
+    using System.Windows.Forms;
+    using MetroFramework.Controls;
+    using Chart;
+
     public static class CreateDatePicker
     {
-
         public static DateTime GetDate(DateTimePicker datePicker)
         {
             return datePicker.Value;
@@ -36,6 +35,7 @@ namespace StockWatchApplication.Visualization.DatePickerCreator
                     return;
                 }
             }
+
             UpdateChartData.UpdateFirstSeries(input, c1, c2, startDate, endDate);
             UpdateChartData.UpdateSecondSeries(input, c1, c2, startDate, endDate);
         }

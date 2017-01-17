@@ -1,16 +1,11 @@
-﻿using FinancialInstruments;
-using LiveCharts;
-using LiveCharts.Configurations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LiveCharts.WinForms;
-using LiveCharts.Wpf;
-
-namespace StockWatchApplication.Visualization
+﻿namespace StockWatchApplication.Visualization
 {
+    using System;
+    using LiveCharts;
+    using LiveCharts.Configurations;
+    using LiveCharts.Wpf;
+    using Models.Utils;
+
     public static class InitializeChart
     {
         public static void InitializeAll(LiveCharts.WinForms.CartesianChart input)

@@ -1,17 +1,12 @@
-﻿using Data;
-using FinancialInstruments;
-using MetroFramework.Controls;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-//using static MetroFramework.Drawing.MetroPaint.ForeColor;
-
-namespace StockWatchApplication.Visualization.TilesCreator
+﻿namespace StockWatchApplication.Visualization.TilesCreator
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Windows.Forms;
+    using Data.Providers;
+    using MetroFramework.Controls;
+
     public static class CreateTiles
     {
         private static List<MetroTile> StockWatchTiles = new List<MetroTile>();
@@ -62,15 +57,15 @@ namespace StockWatchApplication.Visualization.TilesCreator
             }
         }
         
-
         public static void UpdateSecondTabData()
         {
+            
             //green or red color is assigned according to the price change 
-            System.Drawing.Color greenColor = System.Drawing.Color.FromArgb(170, 0, 177, 89);
-            System.Drawing.Color redColor = System.Drawing.Color.FromArgb(170, 209, 17, 65);
+            Color greenColor = Color.FromArgb(170, 0, 177, 89);
+            Color redColor = Color.FromArgb(170, 209, 17, 65);
 
             //generate the new stock data
-            List<Stock> allStocks = DataProvider.ProvideStockPriceChanges();
+            var allStocks = ProvideStockCurrentData.Provide();
 
             //update each label and tile separately
             for (int i = 0; i < StockWatchTiles.Count; i++)
@@ -81,7 +76,7 @@ namespace StockWatchApplication.Visualization.TilesCreator
                 #endregion
 
                 #region UpdateThe information
-                string currentTicker = allStocks[i].Ticker;
+                string currentTicker = allStocks[i].Ticker.ToString();
                 decimal priceChange = allStocks[i].PercentagePriceChange.Price;
                 System.Drawing.Color color = greenColor;
                 if (priceChange < 0) color = redColor;
