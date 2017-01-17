@@ -1,4 +1,21 @@
 # StockApp
 C# OOP | Team Elderberry | Line-of-business-application
+### Team Members
+The following team members were randomly chosen to participate in the team project assignment as **Team 'Elderberry'**:
 
-[Project Description](https://github.com/TelerikAcademy/Object-Oriented-Programming/blob/master/Teamwork/README.md)
+| Name             | *Username*           |
+| -----------------| ---------------------|
+| Milena Sapunova  | *milena.aleksandrova*|
+| Nikolay Valkov   | *ndvalkov*           |
+| Yasen Ivanov     | *yasen.ivanov.921*   |
+| Julian Panov     | *julian_panov*       |
+| Georgi Despolov  | *despolov96*         |
+| Lyuben Bobchev   | *LyubenST*           |
+| Roksana Peycheva | *roksana.peycheva.5* |
+
+### Project Purpose:
+
+### Class diagram:
+
+### URL to repository
+[**Link to GitHub repository**](https://github.com/Team-Elderberry-CSharpOOP/StockApp)
