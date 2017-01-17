@@ -90,7 +90,9 @@
     </Compile>
     <Compile Include="StartApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Visualization\InitializeChart.cs" />
+    <Compile Include="Visualization\Chart\InitializeChart.cs" />
+    <Compile Include="Visualization\Chart\UpdateChartData.cs" />
+    <Compile Include="Visualization\ComboBox\ComboBox.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>

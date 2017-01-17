@@ -55,5 +55,7 @@ namespace StockWatchApplication.Visualization
                 LabelFormatter = value => String.Format("${0,000}", value),
             });
         }
+
+
     }
 }
