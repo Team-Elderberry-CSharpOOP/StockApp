@@ -14,13 +14,12 @@
     using System.Windows.Forms;
     using System.Windows.Media;
     using StockWatchApplication.Visualization;
-    using Visualization.VisualizeComboBox;
+    using Visualization.ComboBoxCreator;
+    using StockWatchApplication.Visualization.Chart;
 
     public partial class MainForm : MetroFramework.Forms.MetroForm
     {
         private static CultureInfo provider = CultureInfo.InvariantCulture;
-        private static ChartValues<DataPoint> ChartValues1 { get; set; }
-        private static ChartValues<DataPoint> ChartValues2 { get; set; }
         private static List<MetroTile> StockWatchTiles = new List<MetroTile>();
         private static List<Label> StockWatchLabels = new List<Label>();
         private static IRequestTimer mt;
@@ -81,82 +80,82 @@
         private void ChooseStockIndex1_SelectedIndexChanged(object sender, EventArgs e)
         {
             IfComboBoxesTheSame();
-            UpdateFirstSeries();
+            UpdateChartData.UpdateFirstSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
         }
 
         private void ChooseStockIndex2_SelectedIndexChanged(object sender, EventArgs e)
         {
             IfComboBoxesTheSame();
-            UpdateSecondSeries();
+            UpdateChartData.UpdateSecondSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
         }
 
 
         // MOVED TO UpdateChartData.cs
 
 
-        private void UpdateFirstSeries()
-        {
-            //First Data Series
-            if (ChooseStockIndex1.SelectedItem == null) return;
+        //private void UpdateFirstSeries()
+        //{
+        //    //First Data Series
+        //    if (ChooseStockIndex1.SelectedItem == null) return;
 
-            string ticker1 = VisualizeComboBox.GetComboBoxValue(ChooseStockIndex1);
+        //    string ticker1 = VisualizeComboBox.GetComboBoxValue(ChooseStockIndex1);
 
-            Index currentIndex = DataProvider.ProvideIndexSeries(
-                ticker1,
-                GetDate(ChooseStartDate),
-                GetDate(ChooseEndDate),
-                "d");
+        //    Index currentIndex = DataProvider.ProvideIndexSeries(
+        //        ticker1,
+        //        GetDate(ChooseStartDate),
+        //        GetDate(ChooseEndDate),
+        //        "d");
 
-            ChartValues1 = new ChartValues<DataPoint>(currentIndex.Data);
+        //    ChartValues1 = new ChartValues<DataPoint>(currentIndex.Data);
 
-            //Indexer is not support. Thus, I need to remove the old Series 
-            this.StockIndexLineChart.Series.RemoveAt(0);
+        //    //Indexer is not support. Thus, I need to remove the old Series 
+        //    this.StockIndexLineChart.Series.RemoveAt(0);
 
-            this.StockIndexLineChart.Series.Insert(0, new LineSeries
-            {
-                Title = VisualizeComboBox.GetComboBoxKey(ChooseStockIndex1),
-                Values = ChartValues1,
-                PointGeometry = null,
-                Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 174, 219)),
-                Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(35, 0, 174, 219)),
-                StrokeThickness = 2.5
-            });
-        }
+        //    this.StockIndexLineChart.Series.Insert(0, new LineSeries
+        //    {
+        //        Title = VisualizeComboBox.GetComboBoxKey(ChooseStockIndex1),
+        //        Values = ChartValues1,
+        //        PointGeometry = null,
+        //        Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 174, 219)),
+        //        Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(35, 0, 174, 219)),
+        //        StrokeThickness = 2.5
+        //    });
+        //}
 
-        private void UpdateSecondSeries()
-        {
-            //Second Data Serires
-            if (ChooseStockIndex2.SelectedItem == null) return;
-            if (VisualizeComboBox.GetComboBoxKey(ChooseStockIndex2) == "")
-            {
-                if (StockIndexLineChart.Series.Count == 2)
-                {
-                    StockIndexLineChart.Series.Remove(StockIndexLineChart.Series[1]);
-                }
-                return;
-            }
+        //private void UpdateSecondSeries()
+        //{
+        //    //Second Data Serires
+        //    if (ChooseStockIndex2.SelectedItem == null) return;
+        //    if (VisualizeComboBox.GetComboBoxKey(ChooseStockIndex2) == "")
+        //    {
+        //        if (StockIndexLineChart.Series.Count == 2)
+        //        {
+        //            StockIndexLineChart.Series.Remove(StockIndexLineChart.Series[1]);
+        //        }
+        //        return;
+        //    }
 
-            string ticker2 = VisualizeComboBox.GetComboBoxValue(ChooseStockIndex2);
+        //    string ticker2 = VisualizeComboBox.GetComboBoxValue(ChooseStockIndex2);
 
-            Index additionalIndex = DataProvider.ProvideIndexSeries(
-            ticker2,
-            GetDate(ChooseStartDate),
-            GetDate(ChooseEndDate),
-            "d");
+        //    Index additionalIndex = DataProvider.ProvideIndexSeries(
+        //    ticker2,
+        //    GetDate(ChooseStartDate),
+        //    GetDate(ChooseEndDate),
+        //    "d");
 
-            ChartValues2 = new ChartValues<DataPoint>(additionalIndex.Data);
+        //    ChartValues2 = new ChartValues<DataPoint>(additionalIndex.Data);
 
-            if (StockIndexLineChart.Series.Count == 2) StockIndexLineChart.Series.RemoveAt(1);
-            StockIndexLineChart.Series.Add(new LineSeries
-            {
-                Title = VisualizeComboBox.GetComboBoxKey(ChooseStockIndex2),
-                Values = ChartValues2,
-                PointGeometry = null,
-                Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(124, 65, 153)),
-                Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(35, 124, 65, 153)),
-                StrokeThickness = 2.5
-            });
-        }
+        //    if (StockIndexLineChart.Series.Count == 2) StockIndexLineChart.Series.RemoveAt(1);
+        //    StockIndexLineChart.Series.Add(new LineSeries
+        //    {
+        //        Title = VisualizeComboBox.GetComboBoxKey(ChooseStockIndex2),
+        //        Values = ChartValues2,
+        //        PointGeometry = null,
+        //        Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(124, 65, 153)),
+        //        Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(35, 124, 65, 153)),
+        //        StrokeThickness = 2.5
+        //    });
+        //}
 
         
 
@@ -201,8 +200,8 @@
                     return;
                 }
             }
-            UpdateFirstSeries();
-            UpdateSecondSeries();
+            UpdateChartData.UpdateFirstSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
+            UpdateChartData.UpdateSecondSeries(this.StockIndexLineChart, this.ChooseStockIndex1, this.ChooseStockIndex2, this.ChooseStartDate, this.ChooseEndDate);
         }
 
         private void AddTilesSecondTab()

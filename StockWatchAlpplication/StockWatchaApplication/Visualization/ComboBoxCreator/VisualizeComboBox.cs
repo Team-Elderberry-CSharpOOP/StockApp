@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StockWatchApplication.Visualization.VisualizeComboBox
+namespace StockWatchApplication.Visualization.ComboBoxCreator
 {
     public static class VisualizeComboBox
     {
