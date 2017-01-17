@@ -28,14 +28,14 @@ The following team members were randomly chosen to participate in the team proje
 ### Project Purpose:
 Following a team meeting and carefull consideration of our ideas, all team members agreed to fulfill the team project requirements by creating a Stock Application. The user is first required to enter username and password. After successfull login, one can see the performance of the S&P 500 for the past 6 months. The user can choose another index or can compare two indicies at the same time. He is also abel to choose dates and disply a different time period. On the second tab, one can observe the percentage price change of 8 stocks in real time. The data is downloaded and displayed every few seconds. The application indicates the price update with a short blinking of the box. 
 
-### Screenshots
-<img align="left" src="StockWatchAlpplication/StockWatchAlpplication/Resources/ScreenShots/ScreenShot.png">
-<img align="left" src="StockWatchAlpplication/StockWatchAlpplication/Resources/ScreenShots/ScreenShot1.png"> 
-<img align="left" src="StockWatchAlpplication/StockWatchAlpplication/Resources/ScreenShots/ScreenShot2.png">  
-<img align="left" src="StockWatchAlpplication/StockWatchAlpplication/Resources/ScreenShots/ScreenShot3.png"> 
+### Screenshots		   
+<img align="center" src="Resources/ScreenShots/ScreenShot.png">
+<img align="center" src="Resources/ScreenShots/ScreenShot1.png"> 
+<img align="center" src="Resources/ScreenShots/ScreenShot2.png">  
+<img align="center" src="Resources/ScreenShots/ScreenShot3.png"> 
 
 ### Class diagram:
-<img align="center" src="StockWatchAlpplication/StockWatchAlpplication/Resources/ClassDiagram/ClassDiagram5.png"> 
+<img align="center" src="Resources/ClassDiagram/ClassDiagram5.png"> 
  
 ### URL to repository
 [**Link to GitHub repository**](https://github.com/Team-Elderberry-CSharpOOP/StockApp)
